@@ -86,15 +86,15 @@
 <meta property="og:site_name" content="小吴的Blog">
 <meta property="og:description" content="一、REM是什么REM是（font size of the root element），意思是网页的根元素的字体大小。 二、使用REM适配屏幕(1)可以把REM作为基准，设定元素的宽高。1、设定根元素的font-size的大小：">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/.com//rem-1.jpg">
-<meta property="og:image" content="http://example.com/.com//rem-2.jpg">
-<meta property="og:image" content="http://example.com/.com//rem-3.jpg">
+<meta property="og:image" content="http://example.com/2018/07/12/REM/rem-1.jpg">
+<meta property="og:image" content="http://example.com/2018/07/12/REM/rem-2.jpg">
+<meta property="og:image" content="http://example.com/2018/07/12/REM/rem-3.jpg">
 <meta property="article:published_time" content="2018-07-11T16:47:46.000Z">
-<meta property="article:modified_time" content="2021-06-09T06:24:53.150Z">
+<meta property="article:modified_time" content="2021-06-09T07:36:00.537Z">
 <meta property="article:author" content="xing">
 <meta property="article:tag" content="rem">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/.com//rem-1.jpg">
+<meta name="twitter:image" content="http://example.com/2018/07/12/REM/rem-1.jpg">
 
 
 
@@ -356,18 +356,20 @@
 </code></pre>
 <h3 id="4、元素大小："><a href="#4、元素大小：" class="headerlink" title="4、元素大小："></a>4、元素大小：</h3><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.wrapper&gt;div&#123;</span><br><span class="line">    width:4rem;</span><br><span class="line">    height:4rem;</span><br><span class="line">    margin:0.5rem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p><img src="/.com//rem-1.jpg" alt="展示图"></p>
+<img src="/2018/07/12/REM/rem-1.jpg" class>
+
 <h2 id="（2）由于移动端屏幕大小不一，所以可以使用动态REM来适配屏幕。"><a href="#（2）由于移动端屏幕大小不一，所以可以使用动态REM来适配屏幕。" class="headerlink" title="（2）由于移动端屏幕大小不一，所以可以使用动态REM来适配屏幕。"></a>（2）由于移动端屏幕大小不一，所以可以使用动态REM来适配屏幕。</h2><h3 id="1、通过JS获取屏幕的大小，从而决定REM的基准值："><a href="#1、通过JS获取屏幕的大小，从而决定REM的基准值：" class="headerlink" title="1、通过JS获取屏幕的大小，从而决定REM的基准值："></a>1、通过JS获取屏幕的大小，从而决定REM的基准值：</h3><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.getElementsByTagName(&#x27;html&#x27;)[0].style.fontSize = window.innerWidth / 10 + &#x27;px&#x27;;</span><br></pre></td></tr></table></figure>
 </code></pre>
 <h3 id="2、布局与元素大小："><a href="#2、布局与元素大小：" class="headerlink" title="2、布局与元素大小："></a>2、布局与元素大小：</h3><p>html部分代码：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wrapper&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;one&quot;&gt;1&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;two&quot;&gt;2&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;three&quot;&gt;3&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;four&quot;&gt;4&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure><br>CSS部分代码：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.wrapper&#123;</span><br><span class="line">    display:flex;</span><br><span class="line">    flex-wrap:wrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.wrapper&gt;div&#123;</span><br><span class="line">    width:4rem;</span><br><span class="line">    height:4rem;</span><br><span class="line">    margin:0.5rem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><img src="/.com//rem-2.jpg" alt="展示图"><br>上图为手机端的展示图。</p>
+<img src="/2018/07/12/REM/rem-2.jpg" class>
+<p>上图为手机端的展示图。</p>
 <h1 id="三、对于使用sass的工程"><a href="#三、对于使用sass的工程" class="headerlink" title="三、对于使用sass的工程"></a>三、对于使用sass的工程</h1><h2 id="1、首先安装node-sass"><a href="#1、首先安装node-sass" class="headerlink" title="1、首先安装node-sass"></a>1、首先安装node-sass</h2><h2 id="2、监听scss文件的改动："><a href="#2、监听scss文件的改动：" class="headerlink" title="2、监听scss文件的改动："></a>2、监听scss文件的改动：</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node-sass style.scss style.css -w</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>这样每当修改style.scss文件且保存后，都会同步到style.css中。</p>
 <h2 id="3、每次在规定元素的宽度和高度时，都需要计算像素转换成对应REM，如此有点不方便，所以可以在scss文件中加入一个转换的函数："><a href="#3、每次在规定元素的宽度和高度时，都需要计算像素转换成对应REM，如此有点不方便，所以可以在scss文件中加入一个转换的函数：" class="headerlink" title="3、每次在规定元素的宽度和高度时，都需要计算像素转换成对应REM，如此有点不方便，所以可以在scss文件中加入一个转换的函数："></a>3、每次在规定元素的宽度和高度时，都需要计算像素转换成对应REM，如此有点不方便，所以可以在scss文件中加入一个转换的函数：</h2><pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$rem: 320px;</span><br><span class="line">@function px2rem($px) &#123;</span><br><span class="line">    @return $px / $rem*10+rem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>这样在书写css代码时就不需要计算宽高对应多少REM，直接写像素就可以：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.wrapper&gt;div&#123;</span><br><span class="line">    width: px2rem(128px);</span><br><span class="line">    height: px2rem(128px);</span><br><span class="line">    margin: px2rem(16px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>上述代码和之前的效果是一致的。<br><img src="/.com//rem-3.jpg" alt="展示图"></p>
-
+<p>这样在书写css代码时就不需要计算宽高对应多少REM，直接写像素就可以：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.wrapper&gt;div&#123;</span><br><span class="line">    width: px2rem(128px);</span><br><span class="line">    height: px2rem(128px);</span><br><span class="line">    margin: px2rem(16px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>上述代码和之前的效果是一致的。</p>
+<img src="/2018/07/12/REM/rem-3.jpg" class>
       
     </div>
     
