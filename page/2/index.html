@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>小吴的Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="小吴的Blog">
+<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:site_name" content="小吴的Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="xing">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="小吴的Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">小吴的Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-JS函数作用域" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/05/04/JS%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F/" class="article-date">
+  <time class="dt-published" datetime="2018-05-04T04:39:09.000Z" itemprop="datePublished">2018-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/05/04/JS%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F/">JS函数作用域</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1、什么是作用域<br>作用域是变量存在的范围。根据ECMAScript5的规定，JS有两种作用域：全局作用域与函数作用域。全局作用域是指变量存在于整个程序中，任何地方都可以读取；函数作用域变量只存在于函数内部。<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = 2</span><br><span class="line">function f()&#123;</span><br><span class="line">console.log(a)</span><br><span class="line">&#125;</span><br><span class="line">f()</span><br></pre></td></tr></table></figure><br>上述代码变量a定义在函数外部为全局变量，且函数f内部可以读取到全局变量a，输出值为2<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function f()&#123;</span><br><span class="line">var a = 2 </span><br><span class="line">&#125;</span><br><span class="line">console.log(a)</span><br></pre></td></tr></table></figure><br>上述的输出结果为”ReferenceError: a is not defined”，这说明定义在函数内部的变量a是一个变量，函数外部无法访问。<br>2、函数内部同名变量覆盖<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var a = 1</span><br><span class="line">function f()&#123;</span><br><span class="line">var a = 2 </span><br><span class="line">console.log(a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f()</span><br><span class="line"></span><br><span class="line">console.log(a)</span><br></pre></td></tr></table></figure><br>上述代码的输出结果依次为：2、1。这表明定义在函数内部的变量会在函数作用域内覆盖同名变量。<br>3、函数本身的作用域<br>函数有自己的作用域，函数本身的作用域是声明时所在的作用域，和函数运行时所在的作用域无关。<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var a = 1</span><br><span class="line">function f2()&#123;</span><br><span class="line">var a = 2</span><br><span class="line">f1()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function f1()&#123;</span><br><span class="line">console.log(a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f2()</span><br></pre></td></tr></table></figure><br>上述代码的输出为1，函数f1是在函数f2的外部定义的，因此函数f1的作用域为外部而不是函数f2内部，所以变量a的值取全局变量”var a = 1”而不是局部变量”var a = 2”。<br>同理，在函数内部声明的函数，它的作用域绑定函数内部<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var a = 2</span><br><span class="line">function f2()&#123;</span><br><span class="line">var a = 1</span><br><span class="line">  function f1()&#123;</span><br><span class="line">  console.log(a)</span><br><span class="line">  &#125;</span><br><span class="line">return f1</span><br><span class="line">&#125;</span><br><span class="line">var f = f2()</span><br><span class="line">f()</span><br></pre></td></tr></table></figure><br>上述代码输出为1，函数f1在函数f2中声明，因此函数f1的作用域绑定函数f2，所以变量a的取值是函数f2内部的”var a = 1”，而不是函数f2外部的”var a = 2”。<br>所以，函数执行时所在的作用域，是定义时的作用域，而不是调用时所在的作用域</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/05/04/JS%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F/" data-id="ckpox1lt00002wgu0bs9a6hi3" data-title="JS函数作用域" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-JS函数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/05/03/JS%E5%87%BD%E6%95%B0/" class="article-date">
+  <time class="dt-published" datetime="2018-05-03T06:19:16.000Z" itemprop="datePublished">2018-05-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/05/03/JS%E5%87%BD%E6%95%B0/">JS函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1、函数概念<br>    函数是一组执行任务或计算值得语句。</p>
+<p>2、函数声明<br>JS中有两种常用的声明函数的方法<br>(1)function命令<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">funtion square(a)&#123;</span><br><span class="line">    return a*a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>(2)函数表达式<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var square = funtion(a)&#123;</span><br><span class="line">    return a*a;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><br>此函数声明的方式不需要带有函数名，如果加上函数名，函数名只在函数体内部有效，在函数体外部无效。且此种声明方式需要在花括号后加上分号。<br>3、函数名提升<br>浏览器把函数名看作成为变量名，因此在采用function命令声明函数时，函数会和变量声明一样提升到代码头部。<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f();</span><br><span class="line">function f()&#123;&#125;</span><br></pre></td></tr></table></figure><br>上述代码不会报错，上述等同于下方<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function f()&#123;&#125;</span><br><span class="line">f()</span><br></pre></td></tr></table></figure><br>但是使用函数表达式声明函数时却会报错<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f();</span><br><span class="line">var f = function()&#123;&#125;</span><br></pre></td></tr></table></figure><br>上面代码等同于<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var f;</span><br><span class="line">f();</span><br><span class="line">f = function()&#123;&#125;</span><br></pre></td></tr></table></figure><br>上述代码调用f时，f只是被声明却没有赋值（undefined）。<br>4、函数的属性与方法<br>(1)、name属性<br>name属性用以返回函数的名字，如：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function add()&#123;&#125;</span><br><span class="line">add.name//得到函数名&quot;add&quot;</span><br></pre></td></tr></table></figure><br>对于使用函数表达式声明函数返回的是变量名,如:<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var add = function()&#123;&#125;;</span><br><span class="line">add.name//得到变量名&quot;add&quot;</span><br></pre></td></tr></table></figure><br>(2)、length属性<br>length属性用于返回函数的参数个数，如：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function add(x,y)&#123;&#125;</span><br><span class="line">add.length//值为2</span><br></pre></td></tr></table></figure><br>(3)、toString()方法<br>toString方法返回的内容是整个函数的源代码,如：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function add(x,y)&#123;</span><br><span class="line">    return x+y</span><br><span class="line">&#125;</span><br><span class="line">add.toString()</span><br></pre></td></tr></table></figure><br>    得到<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function f(a,b)&#123;</span><br><span class="line"> return a+b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/05/03/JS%E5%87%BD%E6%95%B0/" data-id="ckpox1lsz0001wgu0351k3z9v" data-title="JS函数" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-空标签" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/05/03/%E7%A9%BA%E6%A0%87%E7%AD%BE/" class="article-date">
+  <time class="dt-published" datetime="2018-05-03T06:16:28.000Z" itemprop="datePublished">2018-05-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/05/03/%E7%A9%BA%E6%A0%87%E7%AD%BE/">空标签</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>一个空元素（empty element）可能是 HTML，SVG，或者 MathML 里的一个不可能存在子节点（例如内嵌的元素或者元素内的文本）的element。</p>
+<p>HTML，SVG 和 MathML 的规范都详细定义了每个元素能包含的具体内容（define very precisely what each element can contain）。许多组合是没有任何语义含义的，比如一个 &lt;audio&gt;元素嵌套在一个&lt;hr&gt; 元素里。</p>
+<p>在 HTML 中，通常在一个空元素上使用一个闭标签是无效的。例如， &lt;input type=”text”&gt;&lt;/input&gt; 的闭标签是无效的 HTML。</p>
+<p>在 HTML 中有以下这些空元素：<br>&lt;area&gt;、&lt;base&gt;、&lt;br&gt;、&lt;col&gt;、&lt;command&gt;、&lt;embed&gt;、&lt;hr&gt;、&lt;img&gt;、&lt;input&gt;、&lt;keygen&gt;、&lt;link&gt;、&lt;meta&gt;、&lt;param&gt;、&lt;source&gt;、&lt;track&gt;、&lt;wbr&gt;等等。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/05/03/%E7%A9%BA%E6%A0%87%E7%AD%BE/" data-id="ckpox1lt9000bwgu03h5pfdsf" data-title="空标签" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-搭建Hexo个人博客" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/05/03/%E6%90%AD%E5%BB%BAHexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="article-date">
+  <time class="dt-published" datetime="2018-05-03T06:12:41.000Z" itemprop="datePublished">2018-05-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/05/03/%E6%90%AD%E5%BB%BAHexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">搭建Hexo个人博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>一、搭建前准备工作<br>1、git安装；<br>2、node.js安装；<br>3、GitHub账户注册与配置；<br>4、创建一个新仓库（wuwenxing0912.github.io）–不需要输入“…or create a new repository on the command line”下的命令；<br>5、生成SSH key远程连接GitHub仓库。<br>二、使用Hexo搭建博客<br>1、使用命令 ‘npm install -g hexo-cli’，安装 Hexo；<br>2、初始化目录myBlog ‘hexo init myBlog’，安装模块 ‘npm i’;<br>3、新建md文件编写个人博客 ‘hexo new 开博大吉’；<br>4、修改博客网站配置  ‘start _config.yml’，将Hexo与新建GitHub仓库（wuwenxing0912.github,io） 关联起来；<br>5、安装git部署插件，’npm install hexo-deployer-git –save’；<br>6、加载配置 ‘hexo deploy’；<br>7、进入wuwenxing0912.github.io仓库的settings，打开 GitHub Pages 功能，点击链接进入个人博客；<br>三、搭建环节出现的问题<br>1、在创建新仓库之后输入了“…or create a new repository on the command line”下的命令初始化仓库导致搭建失败；<br>2、配置文件_config.yml中的最后两行type：以及repo:后未加空格导致搭建失败。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/05/03/%E6%90%AD%E5%BB%BAHexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" data-id="ckpox1lt9000awgu048zb2ffa" data-title="搭建Hexo个人博客" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-第二篇博客" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/03/13/%E7%AC%AC%E4%BA%8C%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="article-date">
+  <time class="dt-published" datetime="2018-03-12T17:36:12.000Z" itemprop="datePublished">2018-03-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/03/13/%E7%AC%AC%E4%BA%8C%E7%AF%87%E5%8D%9A%E5%AE%A2/">第二篇博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Hexo 博客终于成功了！开森！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/03/13/%E7%AC%AC%E4%BA%8C%E7%AF%87%E5%8D%9A%E5%AE%A2/" data-id="ckpox1lta000cwgu0gzxfcns9" data-title="第二篇博客" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/06/09/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/10/%E5%88%A4%E6%96%ADJS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95/">判断JS数据类型的方法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/12/REM/">REM</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/11/flex%E5%B8%83%E5%B1%80/">flex布局</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/02/webpack%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">webpack的安装与配置</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 xing<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

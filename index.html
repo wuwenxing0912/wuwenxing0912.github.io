@@ -74,7 +74,7 @@
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/06/09/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2021-06-09T03:25:24.428Z" itemprop="datePublished">2021-06-09</time>
+  <time class="dt-published" datetime="2021-06-09T03:31:54.832Z" itemprop="datePublished">2021-06-09</time>
 </a>
     
   </div>
@@ -105,7 +105,7 @@
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/deployment.html">Deployment</a></p>
 
       
     </div>
@@ -122,7 +122,438 @@
 
 
   
+    <article id="post-判断JS数据类型的方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/08/10/%E5%88%A4%E6%96%ADJS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2018-08-09T16:25:37.000Z" itemprop="datePublished">2018-08-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/08/10/%E5%88%A4%E6%96%ADJS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95/">判断JS数据类型的方法</a>
+    </h1>
+  
 
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在 ECMAScript 规范中，一共有7种数据类型，分别为：<br>Number、String、Boolean、Null、Undefined、Symbol、Object。<br>其中Number、String、Boolean、Null、Undefined、Symbol为基本类型，Object为引用类型或称复杂类型。</p>
+<p>1、typeof<br>typeof 是一个操作符，右侧跟一个一元表达式，并返回这个表达式的数据类型。返回的结果用该类型的字符串(全小写字母)形式表示。如下:<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">typeof 123 //&quot;number&quot;</span><br><span class="line">typeof &#x27;123&#x27; //&quot;string&quot;</span><br><span class="line">typeof true //&quot;boolean&quot;</span><br><span class="line">typeof undefined //&quot;undefined&quot;</span><br><span class="line">typeof Symbol(&#x27;123&#x27;) //&quot;symbol&quot;</span><br><span class="line">typeof &#123;&#125; //&quot;object&quot;</span><br><span class="line">typeof function f()&#123;&#125; //&quot;function&quot;</span><br><span class="line">typeof new Array() //&quot;object&quot;</span><br><span class="line">typeof new Date() //&quot;object&quot;</span><br></pre></td></tr></table></figure><br>所以，typeof的返回值有7种分别是：number、boolean、symbol、string、object、undefined、function 。<br>需要注意的是null返回的是”object”，函数返回的是”function”,其余均符合预期结果。</p>
+<p>2、instanceof<br>instanceof运算符返回一个布尔值(true/false)，表示对象是否为某个构造函数的实例。<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function A()&#123;&#125;</span><br><span class="line">var a = new A()</span><br><span class="line">a instanceof A //true</span><br></pre></td></tr></table></figure></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;str&quot; instanceof String //false 字符串不是String对象的实例（因为字符串不是对象），//所以返回false。</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>需要注意的是instanceof运算符只能用于对象，不适用原始类型的值。<br>此外instanceof检查整个原型链，因此同一个实例对象，可能会对多个构造函数都返回true。如：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[] instanceof Array // true</span><br><span class="line">[] instanceof Object //true</span><br></pre></td></tr></table></figure><br>上述情况成立的原因是：[].<strong>proto</strong>.<strong>proto</strong> === Object.prototype //true。<br>其中[].<strong>proto</strong> === Array.prototype //true,<br>Array.prototype.<strong>proto</strong> === Object.prototype//true</p>
+<p>3、toString方法<br>toString() 是 Object 的原型方法，这是一个内部属性，其格式为 [object Xxx] ，其中 Xxx 就是对象的类型。<br>对于 Object 对象，直接调用 toString()  就能返回 [object Object] 。而对于其他对象，则需要通过 call / apply 来调用才能返回正确的类型信息。<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Object.prototype.toString.call(123) //&quot;[object Number]&quot;</span><br><span class="line">Object.prototype.toString.call(&#x27;123&#x27;) //&quot;[object String]&quot;</span><br><span class="line">Object.prototype.toString.call(true) //&quot;[object Boolean]&quot;</span><br><span class="line">Object.prototype.toString.call(null) //&quot;[object Null]&quot;</span><br><span class="line">Object.prototype.toString.call(undefined) //&quot;[object Undefined]&quot;</span><br><span class="line">Object.prototype.toString.call(Symbol(&#x27;123&#x27;)) //&quot;[object Symbol]&quot;</span><br><span class="line">Object.prototype.toString.call(&#123;&#125;) //&quot;[object Object]&quot;</span><br><span class="line">Object.prototype.toString.call([]) //&quot;[object Array]&quot;</span><br><span class="line">Object.prototype.toString.call(function f()&#123;&#125;) //&quot;[object Function]&quot;</span><br><span class="line">Object.prototype.toString.call(new Date()) //&quot;[object Date]&quot;</span><br><span class="line">Object.prototype.toString.call(new RegExp()) //&quot;[object RegExp]&quot;</span><br></pre></td></tr></table></figure><br>由此可见使用Object.prototype.toString.call()方法可返回正确的类型。<br>在实际中可使用slice()方法截取所需要的值：<br>    <code>    Object.prototype.toString.call(function f()&#123;&#125;).slice(8,-1) //&quot;Function&quot;     Object.prototype.toString.call([]).slice(8,-1) // &quot;Array&quot;     Object.prototype.toString.call(true).slice(8,-1) //&quot;Boolean&quot;    </code>  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/08/10/%E5%88%A4%E6%96%ADJS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95/" data-id="ckpox1lt50008wgu0da2wa3xt" data-title="判断JS数据类型的方法" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-REM" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/07/12/REM/" class="article-date">
+  <time class="dt-published" datetime="2018-07-11T16:47:46.000Z" itemprop="datePublished">2018-07-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/07/12/REM/">REM</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>一、REM是什么<br>REM是（font size of the root element），意思是网页的根元素的字体大小。</p>
+<p>二、使用REM适配屏幕<br>(1)可以把REM作为基准，设定元素的宽高。<br>1、设定根元素的font-size的大小：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">html&#123;</span><br><span class="line">    font-size:40px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>2、在页面上加入几个元素：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wrapper&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;one&quot;&gt;1&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;two&quot;&gt;2&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;three&quot;&gt;3&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;four&quot;&gt;4&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure><br>3、布局：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.wrapper&#123;</span><br><span class="line">    display:flex;</span><br><span class="line">    flex-wrap:wrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>4、元素大小：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.wrapper&gt;div&#123;</span><br><span class="line">    width:4rem;</span><br><span class="line">    height:4rem;</span><br><span class="line">    margin:0.5rem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="REM/rem-1.jpg" alt="展示图"></p>
+<p>（2）由于移动端屏幕大小不一，所以可以使用动态REM来适配屏幕。<br>1、通过JS获取屏幕的大小，从而决定REM的基准值：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.getElementsByTagName(&#x27;html&#x27;)[0].style.fontSize = window.innerWidth / 10 + &#x27;px&#x27;;</span><br></pre></td></tr></table></figure><br>2、布局与元素大小：<br>html部分代码：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wrapper&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;one&quot;&gt;1&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;two&quot;&gt;2&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;three&quot;&gt;3&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;four&quot;&gt;4&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure><br>CSS部分代码：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.wrapper&#123;</span><br><span class="line">    display:flex;</span><br><span class="line">    flex-wrap:wrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.wrapper&gt;div&#123;</span><br><span class="line">    width:4rem;</span><br><span class="line">    height:4rem;</span><br><span class="line">    margin:0.5rem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="REM/rem-2.jpg" alt="展示图"><br>上图为手机端的展示图。</p>
+<p>三、对于使用sass的工程<br>1、首先安装node-sass<br>2、监听scss文件的改动：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node-sass style.scss style.css -w</span><br></pre></td></tr></table></figure><br>这样每当修改style.scss文件且保存后，都会同步到style.css中。<br>3、每次在规定元素的宽度和高度时，都需要计算像素转换成对应REM，如此有点不方便，所以可以在scss文件中加入一个转换的函数：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$rem: 320px;</span><br><span class="line">@function px2rem($px) &#123;</span><br><span class="line">    @return $px / $rem*10+rem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>这样在书写css代码时就不需要计算宽高对应多少REM，直接写像素就可以：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.wrapper&gt;div&#123;</span><br><span class="line">    width: px2rem(128px);</span><br><span class="line">    height: px2rem(128px);</span><br><span class="line">    margin: px2rem(16px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>上述代码和之前的效果是一致的。<br><img src="REM/rem-3.jpg" alt="展示图"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/07/12/REM/" data-id="ckpox1lt20005wgu0cwh2d81w" data-title="REM" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-flex布局" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/07/11/flex%E5%B8%83%E5%B1%80/" class="article-date">
+  <time class="dt-published" datetime="2018-07-11T08:26:50.000Z" itemprop="datePublished">2018-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/07/11/flex%E5%B8%83%E5%B1%80/">flex布局</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>一、flex布局<br>flex布局（Flexible Box）意为”弹性布局”，可以实现空间的自动分配，自动对齐。<br>使用flex布局的元素，称为flex容器（flex container），它的所有子元素自动成为容器成员，称为flex item。<br>容器默认存在两根轴：水平的主轴（main axis）和垂直的侧轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；侧轴的开始位置叫做cross start，结束位置叫做cross end。<br><img src="flex%E5%B8%83%E5%B1%80/flex.jpg" alt="展示图"></p>
+<p>二、容器属性<br>容器上有6个属性：flex-direction、flex-wrap、flex-flow、justify-content、align-items、align-content。</p>
+<p>1、flex-direction属性确定主轴的方向，flex-direction属性有4个值可选：<br>flex-direction：row; 主轴为水平方向，起点在左端（默认值）<br><img src="flex%E5%B8%83%E5%B1%80/row.jpg" alt="展示图"></p>
+<p>flex-direction：row-reverse; 主轴为水平方向，起点在右端。<br><img src="flex%E5%B8%83%E5%B1%80/row-reverse.jpg" alt="展示图"></p>
+<p>flex-direction：column; 主轴为垂直方向，起点在上方。<br><img src="flex%E5%B8%83%E5%B1%80/column.jpg" alt="展示图"></p>
+<p>flex-direction：column-reverse; 主轴为垂直方向，起点在下方。<br><img src="flex%E5%B8%83%E5%B1%80/column-reverse.jpg" alt="展示图"></p>
+<p>2、flex-wrap属性确定是否换行，flex-wrap属性有3个值可选：<br>flex-wrap：nowrap; 不换行（默认值）<br><img src="flex%E5%B8%83%E5%B1%80/nowrap.jpg" alt="展示图"></p>
+<p>flex-wrap：wrap; 换行，第一行在上方。<br><img src="flex%E5%B8%83%E5%B1%80/wrap.jpg" alt="展示图"></p>
+<p>flex-wrap：wrap-reverse; 换行，第一行在下方。<br><img src="flex%E5%B8%83%E5%B1%80/wrap-reverse.jpg" alt="展示图"></p>
+<p>3、flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。<br>flex-flow：row wrap;<br><img src="flex%E5%B8%83%E5%B1%80/flex-flow.jpg" alt="展示图"></p>
+<p>4、justify-content属性定义了item在主轴上的对齐方式。justify-content属性有5个值可选：<br>justify-content:flex-start; 左对齐（默认值）<br><img src="flex%E5%B8%83%E5%B1%80/flex-start.jpg" alt="展示图"></p>
+<p>justify-content:flex-end; 右对齐<br><img src="flex%E5%B8%83%E5%B1%80/flex-end.jpg" alt="展示图"></p>
+<p>justify-content:center; 居中<br><img src="flex%E5%B8%83%E5%B1%80/center.jpg" alt="展示图"></p>
+<p>justify-content:space-between; 两端对齐，item之间的间隔都相等。<br><img src="flex%E5%B8%83%E5%B1%80/space-between.jpg" alt="展示图"></p>
+<p>justify-content:space-around; 每个item两侧的间隔相等，所以，item之间的间隔比item与边框的间隔大一倍。<br><img src="flex%E5%B8%83%E5%B1%80/space-around.jpg" alt="展示图"></p>
+<p>5、align-items属性定义item在侧轴上如何对齐。align-items属性有5个值可选：<br>align-items:flex-start; 侧轴的起点对齐。<br><img src="flex%E5%B8%83%E5%B1%80/align-items-flex-start.jpg" alt="展示图"></p>
+<p>align-items:flex-end; 侧轴的终点对齐。<br><img src="flex%E5%B8%83%E5%B1%80/align-items-flex-end.jpg" alt="展示图"></p>
+<p>align-items:center; 侧轴的中点对齐。<br><img src="flex%E5%B8%83%E5%B1%80/align-items-center.jpg" alt="展示图"></p>
+<p>align-items:baseline; item的第一行文字的基线对齐。<br><img src="flex%E5%B8%83%E5%B1%80/align-items-baseline.jpg" alt="展示图"></p>
+<p>align-items:stretch; 如果item未设置高度或设为auto，将占满整个容器的高度。<br><img src="flex%E5%B8%83%E5%B1%80/align-items-stretch.jpg" alt="展示图"></p>
+<p>6、align-content属性定义多行/多列对齐方式。align-content属性有6个值可选：<br>align-content:flex-start; 与侧轴的起点对齐。<br><img src="flex%E5%B8%83%E5%B1%80/align-content-flex-start.jpg" alt="展示图"></p>
+<p>align-content:flex-end; 与侧轴的终点对齐。<br><img src="flex%E5%B8%83%E5%B1%80/align-content-flex-end.jpg" alt="展示图"></p>
+<p>align-content:center; 与侧轴的中点对齐。<br><img src="flex%E5%B8%83%E5%B1%80/align-content-center.jpg" alt="展示图"></p>
+<p>align-content:space-between; 侧轴两端对齐，轴线之间的间隔平均分布。<br><img src="flex%E5%B8%83%E5%B1%80/align-content-space-between.jpg" alt="展示图"></p>
+<p>align-content:space-around; 每根轴线两侧的间隔都相等，所以，轴线之间的间隔比轴线与边框的间隔大一倍。<br><img src="flex%E5%B8%83%E5%B1%80/align-content-space-around.jpg" alt="展示图"></p>
+<p>align-content:stretch; 轴线占满整个侧轴（默认值）。<br><img src="flex%E5%B8%83%E5%B1%80/align-content-stretch.jpg" alt="展示图"></p>
+<p>三、item属性<br>item上有6个属性order、flex-grow、flex-shrink、flex-basis、flex、align-self。<br>1、order属性定义item的排列顺序。数值越小，排列越靠前，默认为0。<br>order:1;<br><img src="flex%E5%B8%83%E5%B1%80/order.jpg" alt="展示图"></p>
+<p>2、flex-grow属性定义item的放大比例，默认为0，即如果存在剩余空间，也不放大。<br>如果所有item的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。<br>如果一个item的flex-grow属性为2，其他item都为1，则前者占据的剩余空间将比其他项多一倍。<br>flex-grow:1;<br><img src="flex%E5%B8%83%E5%B1%80/flex-grow.jpg" alt="展示图"></p>
+<p>flex-grow:2;<br><img src="flex%E5%B8%83%E5%B1%80/flex-grow-2.jpg" alt="展示图"></p>
+<p>3、flex-shrink属性定义了item的缩小比例，默认为1，即如果空间不足，该item将缩小。<br>如果所有item的flex-shrink属性都为1，当空间不足时，都将等比例缩小。<br>如果一个item的flex-shrink属性为0，其他item都为1，则空间不足时，前者不缩小。<br>flex-shrink:1;<br><img src="flex%E5%B8%83%E5%B1%80/flex-shrink.jpg" alt="展示图"></p>
+<p>flex-shrink:0;<br><img src="flex%E5%B8%83%E5%B1%80/flex-shrink-2.jpg" alt="展示图"></p>
+<p>4、flex-basis属性定义了在分配多余空间之前，item占据的主轴空间（main size）。<br>浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即item的本来大小。<br>它可以设为跟width或height属性一样的值，则item将占据固定空间。<br>flex-basis:230px;<br><img src="flex%E5%B8%83%E5%B1%80/flex-basis.jpg" alt="展示图"></p>
+<p>5、flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。<br>flex:1 1 230px;<br><img src="flex%E5%B8%83%E5%B1%80/flex-auto.jpg" alt="展示图"></p>
+<p>6、align-self属性允许单个item有与其他item不一样的对齐方式，可覆盖align-items属性。默认值为auto，<br>表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。<br>align-self:flex-end;<br><img src="flex%E5%B8%83%E5%B1%80/align-self.jpg" alt="展示图"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/" data-id="ckpox1lt20004wgu05ab280qf" data-title="flex布局" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-webpack的安装与配置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/07/02/webpack%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time class="dt-published" datetime="2018-07-01T17:05:28.000Z" itemprop="datePublished">2018-07-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/07/02/webpack%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">webpack的安装与配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>一、安装<br>1、首先进行初始化，得到合法的package.json；<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init -y</span><br></pre></td></tr></table></figure><br>2、进入webpack官方网站，查看安装要点，这里选择的webpack版本是3.12.0；<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm instasll -save-dev webpack@3</span><br></pre></td></tr></table></figure><br>3、在当前目录下创建webpack.config.js文件，文件内容如下：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const path = require(&#x27;path&#x27;);</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">    entry: &#x27;./src/index.js&#x27;,</span><br><span class="line">    output: &#123;</span><br><span class="line">    filename: &#x27;main.js&#x27;,</span><br><span class="line">    path: path.resolve(__dirname, &#x27;dist&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><br>4、保存文件后，在当前的src目录下创建一个index.js文件，然后执行如下命令：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx webpack</span><br></pre></td></tr></table></figure><br>或者还可以执行 ./node-modules/.bin/webpack  命令执行后（未报错）查看当前的dist目录下是否有main.js,<br>如果有，则表示成功。</p>
+<p>二、安装babel<br>1、使用babel把ES6或者更高版本的代码转换为兼容IE浏览器的JS代码<br>这里使用的版本是：webpack 3.12.0 、babel-loader 7.1.4 、 babel 6.26.3 ，所以安装命令是：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install babel-loader babel-core babel-preset-env webpack</span><br></pre></td></tr></table></figure><br>2、在webpack.config.js文件中加入如下代码：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">module: &#123;</span><br><span class="line">    rules: [&#123;</span><br><span class="line">            test: /\.js$/,</span><br><span class="line">            exclude: /(node_modules|bower_components)/,</span><br><span class="line">            use: &#123;</span><br><span class="line">                loader: &#x27;babel-loader&#x27;,</span><br><span class="line">                options: &#123;</span><br><span class="line">                    presets: [&#x27;env&#x27;]</span><br><span class="line">                 &#125;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>3、在index.js文件中写入如下代码：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let a = 1</span><br><span class="line">alert(a)</span><br></pre></td></tr></table></figure><br>4、执行 ./node-modules/.bin/webpack  命令，查看dist目录下的main.js文件发现代码已经转换：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = 1</span><br><span class="line">alert(a)</span><br></pre></td></tr></table></figure></p>
+<p>三、存在多个模块时的处理<br>1、在src目录下新建js目录并且一次创建module_1.js、module_2.js 以及app.js文件；<br>module_1.js代码如下：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function f1() &#123;</span><br><span class="line">    let a = 1</span><br><span class="line">    console.log(a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default f1 //当被引用时，默认就把f2传给他</span><br></pre></td></tr></table></figure><br>module_2.js代码如下：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function f2() &#123;</span><br><span class="line">    let b = 2</span><br><span class="line">    console.log(b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default f2 </span><br></pre></td></tr></table></figure><br>2、在app.js文件中引入module_1.js与module_2.js：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import module1 from &#x27;./module_1&#x27;</span><br><span class="line">import module2 from &#x27;./module_2&#x27;</span><br><span class="line"></span><br><span class="line">module1()</span><br><span class="line">module2() </span><br></pre></td></tr></table></figure><br>3、修改webpack.config.js文件部分代码如下：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">entry: &#x27;./src/js/app.js&#x27;,</span><br><span class="line">output: &#123;</span><br><span class="line">    filename: &#x27;main.js&#x27;,</span><br><span class="line">    path: path.resolve(__dirname, &#x27;dist/js&#x27;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>4、执行 ./node-modules/.bin/webpack  命令，查看dist目录下的main.js文件，<br>module_1.js与module_2.js中的代码已经被引用。</p>
+<p>四、引入scss并转换为浏览器可以识别的css<br>1、在src目录下新建css目录并创建main.scss文件，且代码如下：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">    background: gray;</span><br><span class="line">    &gt;div &#123;</span><br><span class="line">        padding: 20px;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>2、在src目录下创建index.html文件并且复制到dist目录下，在index.html中引入main.js文件；<br>3、执行安装命令：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install sass-loader node-sass webpack --save-dev</span><br><span class="line">npm install style-loader css-loader --save-dev</span><br></pre></td></tr></table></figure><br>4、修改webpack.config.js部分代码如下：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    test: /\.scss$/,</span><br><span class="line">    use: [&#123;</span><br><span class="line">            loader: &quot;style-loader&quot; // creates style nodes from JS strings</span><br><span class="line">            &#125;, &#123;</span><br><span class="line">                loader: &quot;css-loader&quot; // translates CSS into CommonJS</span><br><span class="line">            &#125;, &#123;</span><br><span class="line">                loader: &quot;sass-loader&quot; // compiles Sass to CSS</span><br><span class="line">            &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>5、在app.js中引入main.scss文件：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#x27;../css/main.scss&#x27;</span><br></pre></td></tr></table></figure><br>6、执行 ./node-modules/.bin/webpack  命令，打开服务 http-server -c-1，<br>在浏览器中输入127.0.0.1:8080，打开控制台。在Elements下发现多出了一个style标签，内容为：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">body&#123;</span><br><span class="line">    background:grey;&#125;</span><br><span class="line">body &gt; div&#123;</span><br><span class="line">    padding:20px;&#125;</span><br></pre></td></tr></table></figure><br>scss文件成功传唤为浏览器可识别的css。</p>
+<p>五、使用postcss-loader自动使css兼容<br>1、执行安装命令：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D postcss-loader</span><br></pre></td></tr></table></figure><br>2、在安装过程中可能会出错，这里遇到的问题是缺少了 postcss-cssnext，所以再安装这部分：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i postcss-cssnext</span><br></pre></td></tr></table></figure><br>3、在根目录下创建postcss.config.js文件，内容为：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    plugins: &#123;</span><br><span class="line">        &#x27;postcss-cssnext&#x27;: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>4、修改main.scss文件内容为：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">body&#123;</span><br><span class="line">    display:flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>5、修改webpack.config.js部分代码如下：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    test: /\.scss$/,</span><br><span class="line">    use: [&#123;</span><br><span class="line">            loader: &quot;style-loader&quot; // creates style nodes from JS strings</span><br><span class="line">            &#125;, &#123;</span><br><span class="line">                loader: &quot;css-loader&quot;, // translates CSS into CommonJS</span><br><span class="line">                options: &#123; importLoaders: 1 &#125;</span><br><span class="line">            &#125;, &#123;</span><br><span class="line">                loader: &#x27;postcss-loader&#x27;</span><br><span class="line">            &#125;, &#123;</span><br><span class="line">                loader: &quot;sass-loader&quot; // compiles Sass to CSS</span><br><span class="line">            &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>6、执行 ./node-modules/.bin/webpack  命令，打开服务 http-server -c-1，<br>在浏览器中输入127.0.0.1:8080，打开控制台。style标签的内容为：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">body&#123;</span><br><span class="line">    display:-webkit-box;</span><br><span class="line">    display:-ms-flexbox;</span><br><span class="line">    display:flex;&#125;</span><br></pre></td></tr></table></figure><br>说明在打包过程中postcss-loader已经自动地将scss转换为兼容的css。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/07/02/webpack%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" data-id="ckpox1lt40006wgu0agfada8t" data-title="webpack的安装与配置" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Cookie、Session和LocalStorage" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/06/30/Cookie%E3%80%81Session%E5%92%8CLocalStorage/" class="article-date">
+  <time class="dt-published" datetime="2018-06-30T15:29:11.000Z" itemprop="datePublished">2018-06-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/06/30/Cookie%E3%80%81Session%E5%92%8CLocalStorage/">Cookie、Session和LocalStorage</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>一、Cookie<br>Cookie是服务器发送给客户端（浏览器）一些信息，浏览器在之后的请求都会带上这些信息。</p>
+<p>Cookie主要用于以下三个方面：<br>1、会话状态管理（如用户登录状态、购物车、游戏分数或其它需要记录的信息）；<br>2、个性化设置（如用户自定义设置、主题等）；<br>3、浏览器行为跟踪（如跟踪分析用户行为等）。</p>
+<p>服务器使用Set-Cookie响应头部向浏览器发送Cookie信息。语法如下：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-Cookie: &lt;cookie名&gt;=&lt;cookie值&gt;</span><br></pre></td></tr></table></figure><br>可以使用Set-Cookie设置某些在浏览器发出请求时所要带上的信息：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setHeader(&#x27;Set-Cookie&#x27;, `username=$&#123;username&#125;`)</span><br></pre></td></tr></table></figure><br>上述代码表示在浏览发出请求时，HTTP请求头就会带上用户的用户名。<br>此外，还可以设置Cookie的有效期：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setHeader(&#x27;Set-Cookie&#x27;, &#x27;Max_Age=60&#x27;)</span><br></pre></td></tr></table></figure><br>上述代码表示Cookie在60秒之后将会过期失效。</p>
+<p>document.cookie能够读写当前页面的Cookie。<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">document.cookie//username=xxx</span><br><span class="line">document.cookie = &#x27;username=yyy&#x27;</span><br></pre></td></tr></table></figure><br>HttpOnly属性指定该Cookie无法通过JavaScript代码获取到<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-Cookie: &lt;cookie-name&gt;=&lt;cookie-value&gt;; HttpOnly</span><br></pre></td></tr></table></figure></p>
+<p>二、Session<br>Session一般是基于Cookie来实现的。首先服务器通过Cookie把SessionId发送给浏览器，<br>这个SessionId是唯一的，也是区分用户的标识。之后浏览器的每次请求都要带上SessionId，这样服务器就能辨别用户。<br>Session是在服务器保存的一个数据结构，用来跟踪用户的状态，这个数据可以保存在集群、数据库、文件中。<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var sessionID = Math.random() * 10000</span><br><span class="line">response.setHeader(&#x27;Set-Cookie&#x27;, `sessionID=$&#123;sessionID&#125;`)</span><br></pre></td></tr></table></figure><br>上述代码通过随机数给用户分配一个SessionId。</p>
+<p>三、LocalStorage<br>LocalStorage保存的数据长期存在（除非用户清理缓存），下一次访问该网站的时候，网页可以直接读取以前保存的数据。<br>LocalStorage与HTTP协议无关，在浏览器发送请求时，请求头不会带上LocalStorage的数据。</p>
+<p>Storage接口提供了setItem()方法用来存入数据，该方法接受两个参数，第一个是键名，第二个是保存的数据。<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.localStorage.setItem(&#x27;name&#x27;, &#x27;BOb&#x27;);</span><br></pre></td></tr></table></figure></p>
+<p>Storage接口还提供了getItem()方法用来存入数据，该方法只接受一个参数，参数就是键名。<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.localStorage.getItem(&#x27;name&#x27;);//&#x27;BOb&#x27;</span><br></pre></td></tr></table></figure><br>上述代码通过键名读取到了之前存入的数据，如果键名不存在则返回null。</p>
+<p>removeItem()方法能够删除键名对应的键值，该方法只接受一个参数，参数就是键名。<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">window.localStorage.removeItem(&#x27;name&#x27;);</span><br><span class="line">window.localStorage.getItem(&#x27;name&#x27;);//null</span><br></pre></td></tr></table></figure><br>上述代码通过removeItem()方法删除对应的键值后，再使用getItem()方法得到的是null。</p>
+<p>在某个网页存入的数据，只有相同域名的页面才能读取到。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/06/30/Cookie%E3%80%81Session%E5%92%8CLocalStorage/" data-id="ckpox1lsv0000wgu03vf799nd" data-title="Cookie、Session和LocalStorage" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-事件模型" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/06/30/%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%9E%8B/" class="article-date">
+  <time class="dt-published" datetime="2018-06-29T17:37:05.000Z" itemprop="datePublished">2018-06-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/06/30/%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%9E%8B/">事件模型</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1、事件模型，就是通过监听函数对事件做出反应。<br>当事件发生时，浏览器监听到了这个事件，就会执行对应的监听函数。</p>
+<p>2、事件模型传播的三个阶段<br>第一阶段：从window对象传导到目标节点（上层传到底层），称为“捕获阶段”（capture phase）。<br>第二阶段：在目标节点上触发，称为“目标阶段”（target phase）。<br>第三阶段：从目标节点传导回window对象（从底层传回上层），称为“冒泡阶段”（bubbling phase）。</p>
+<p>3、一个事件传播的例子<br>html代码如下：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;first&quot;&gt;first</span><br><span class="line">    &lt;div id=&quot;second&quot;&gt;second</span><br><span class="line">        &lt;div id=&quot;third&quot;&gt;third&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<p><img src="%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%9E%8B/1.jpg" alt="展示图"></p>
+<p>JavaScript代码如下：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var first = document.querySelector(&#x27;#first&#x27;)</span><br><span class="line"></span><br><span class="line">var second = document.querySelector(&#x27;#second&#x27;)</span><br><span class="line"></span><br><span class="line">var third = document.querySelector(&#x27;#third&#x27;)</span><br><span class="line"></span><br><span class="line">first.addEventListener(&#x27;click&#x27;,function()&#123;</span><br><span class="line">    console.log(&#x27;first&#x27;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">second.addEventListener(&#x27;click&#x27;,function()&#123;</span><br><span class="line">    console.log(&#x27;second&#x27;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">third.addEventListener(&#x27;click&#x27;,function()&#123;</span><br><span class="line">    console.log(&#x27;third&#x27;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><br>当点击third框时，控制台输出的顺序为：third、second、first。<br>这表明是在冒泡阶段执行的监听函数，这是因为 addEventListener<br>可以选填第三个参数（布尔类型的值），当没传时默认为false，监听函数在冒泡阶段执行；<br>当传入的值为true时，监听函数在捕获阶段执行。<br>所以，给这3个监听函数传入true时，控制台输出的顺序为：first、second、third。</p>
+<p>4、阻止事件传播<br>stopPropagation方法可以阻止事件的传播。<br>把third的监听函数改为如下时：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">third.addEventListener(&#x27;click&#x27;,function(e)&#123;</span><br><span class="line">    e.stopPropagation()</span><br><span class="line">    console.log(&#x27;third&#x27;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><br>控制台输出为：third；说明阻止了事件在冒泡阶段上的传播。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/06/30/%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%9E%8B/" data-id="ckpox1lt50007wgu02pzq8a2y" data-title="事件模型" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-MVC模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/06/21/MVC%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2018-06-21T07:36:33.000Z" itemprop="datePublished">2018-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/06/21/MVC%E6%A8%A1%E5%BC%8F/">MVC模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>一、什么是MVC<br>Model操作数据、View表示视图、Controller是控制器。<br>Model和服务器交互，Model将得到的数据交给Controller，Controller把数据填入View并监听View。<br>用户操作View，如点击按钮，Controller就会接受到点击事件，Controller这时会去调用Model，Model会与服务器交互，得到数据后返回给Controller，Controller得到数据就去更新View。</p>
+<p>二、使用MVC制作一个留言板<br>html部分代码：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;formAndMessageList&quot;&gt;</span><br><span class="line">    &lt;form id=&quot;myForm&quot; class=&quot;basic-grey&quot;&gt;</span><br><span class="line">        &lt;h1&gt;留言板&lt;/h1&gt;</span><br><span class="line">        &lt;label&gt;</span><br><span class="line">        &lt;span&gt;姓 名 :&lt;/span&gt;</span><br><span class="line">        &lt;input id=&quot;name&quot; type=&quot;text&quot; name=&quot;name&quot;/&gt;</span><br><span class="line">        &lt;/label&gt;</span><br><span class="line"></span><br><span class="line">        &lt;label&gt;</span><br><span class="line">        &lt;span&gt;邮 箱 :&lt;/span&gt;</span><br><span class="line">        &lt;input id=&quot;email&quot; type=&quot;text&quot; name=&quot;email&quot;/&gt;</span><br><span class="line">        &lt;/label&gt;</span><br><span class="line"></span><br><span class="line">        &lt;label&gt;</span><br><span class="line">        &lt;span&gt;留 言 :&lt;/span&gt;</span><br><span class="line">        &lt;textarea id=&quot;message&quot; name=&quot;message&quot;&gt;&lt;/textarea&gt;</span><br><span class="line">        &lt;/label&gt;</span><br><span class="line"></span><br><span class="line">        &lt;label&gt;</span><br><span class="line">        &lt;span&gt;&amp;nbsp;&lt;/span&gt;</span><br><span class="line">        &lt;input type=&quot;submit&quot; class=&quot;button&quot; value=&quot;提交&quot;/&gt;</span><br><span class="line">        &lt;/label&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">    &lt;ol id=&quot;messageList&quot;&gt;</span><br><span class="line">    &lt;/ol&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure><br>界面效果展示：<br><img src="MVC%E6%A8%A1%E5%BC%8F/1.jpg" alt="展示图"></p>
+<p>在填写完相关信息后。点击提交按钮，留言即刻更新在留言展示区域。</p>
+<p>JavaScript部分代码：<br>首先是View，包括信息填写区域和下方的留言展示区域：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var view = document.querySelector(&#x27;#formAndMessageList&#x27;)</span><br></pre></td></tr></table></figure></p>
+<p>其次是Model，这里是Model与LeanCloud进行交互：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">var model = &#123;</span><br><span class="line">    init: function() &#123;</span><br><span class="line">        var APP_ID = &#x27;wbGEKwjkKqYviJXXXXXXXXXXXXXX&#x27;;</span><br><span class="line">        var APP_KEY = &#x27;QNwxXOzQmf0UIXXXXXXXXXXXXXX&#x27;;</span><br><span class="line">        AV.init(&#123;</span><br><span class="line">            appId: APP_ID,</span><br><span class="line">            appKey: APP_KEY</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    read: function() &#123;</span><br><span class="line">        var query = new AV.Query(&#x27;Test&#x27;)</span><br><span class="line">        return query.find()</span><br><span class="line">    &#125;,</span><br><span class="line">    save: function(nameContent, emailContent, messageContent) &#123;</span><br><span class="line">        var Test = AV.Object.extend(&#x27;Test&#x27;);</span><br><span class="line">        var test = new Test();</span><br><span class="line">        return test.save(&#123;</span><br><span class="line">            name: nameContent,</span><br><span class="line">            email: emailContent,</span><br><span class="line">            message: messageContent</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>在LeanCloud上新建了一个应用，同时初始化了应用的ID和应用的KEY，并且提供了与LeanCloud应用读写的方法。<br>最后是Controller部分代码：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">var controller = &#123;</span><br><span class="line">    view: null,</span><br><span class="line">    model: null,</span><br><span class="line">    messageList: null,</span><br><span class="line">    myForm: null,</span><br><span class="line">    init: function(view, model) &#123;</span><br><span class="line">        this.view = view</span><br><span class="line">        this.model = model</span><br><span class="line"></span><br><span class="line">        this.messageList = view.querySelector(&#x27;#messageList&#x27;)</span><br><span class="line">        this.myForm = view.querySelector(&#x27;#myForm&#x27;)</span><br><span class="line">        this.model.init()</span><br><span class="line">        this.loadMessage()</span><br><span class="line">        this.bindEvents()</span><br><span class="line">    &#125;,</span><br><span class="line">    loadMessage: function() &#123;</span><br><span class="line">        this.model.read().then((informations) =&gt; &#123;</span><br><span class="line">            var array = informations.map((item) =&gt; item.attributes)</span><br><span class="line">            array.forEach((item) =&gt; &#123;</span><br><span class="line">                var li = document.createElement(&#x27;li&#x27;)</span><br><span class="line">                li.innerText = `$&#123;item.name&#125;($&#123;item.email&#125;):$&#123;item.message&#125; `</span><br><span class="line">                messageList.appendChild(li)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    bindEvents: function() &#123;</span><br><span class="line">        this.myForm.addEventListener(&#x27;submit&#x27;, (e) =&gt; &#123;</span><br><span class="line">            e.preventDefault();</span><br><span class="line">            this.saveMessage()</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    saveMessage: function() &#123;</span><br><span class="line">        var myForm = this.myForm</span><br><span class="line">        var nameContent = myForm.querySelector(&#x27;input[name=name]&#x27;).value</span><br><span class="line">        var emailContent = myForm.querySelector(&#x27;input[name=email]&#x27;).value</span><br><span class="line">        var messageContent = myForm.querySelector(&#x27;textarea&#x27;).value</span><br><span class="line"></span><br><span class="line">        this.model.save(nameContent, emailContent, messageContent)</span><br><span class="line">            .then(function(object) &#123;</span><br><span class="line">                var li = document.createElement(&#x27;li&#x27;)</span><br><span class="line">                li.innerText = `$&#123;object.attributes.name&#125;:$&#123;object.attributes.message&#125; $&#123;object.attributes.email&#125;`</span><br><span class="line">                messageList.appendChild(li)</span><br><span class="line">                myForm.querySelector(&#x27;textarea&#x27;).value = &#x27;&#x27;</span><br><span class="line">            &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Controller部分的代码提供了一系列的逻辑处理，包括监听View中的点击事件、操作DOM（更新View）、<br>调用Model使用与服务器交互。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/06/21/MVC%E6%A8%A1%E5%BC%8F/" data-id="ckpox1lt10003wgu08vc5cqth" data-title="MVC模式" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-闭包" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/06/20/%E9%97%AD%E5%8C%85/" class="article-date">
+  <time class="dt-published" datetime="2018-06-20T15:24:10.000Z" itemprop="datePublished">2018-06-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/06/20/%E9%97%AD%E5%8C%85/">闭包</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1、闭包的概念<br>根据MDN的定义：闭包(closure)是函数和声明该函数的词法环境(词法作用域)的组合。<br>其中词法作用域是指代码编写时变量所处的作用域。<br>在ES5中有两种作用域：全局作用域和函数作用域。<br>函数内部可以直接读取全局变量：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = 1</span><br><span class="line">function f()&#123;</span><br><span class="line">console.log(a)</span><br><span class="line">&#125;</span><br><span class="line">f()//控制台输出结果为 1</span><br></pre></td></tr></table></figure><br>但是函数外部不能获取函数内部的变量：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function f()&#123;</span><br><span class="line">var a = 1</span><br><span class="line">&#125;</span><br><span class="line">console.log(a)//控制台报错：a is not defined</span><br></pre></td></tr></table></figure><br>如果想获取函数内部的变量，可以在函数内部再声明一个函数：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function f()&#123;</span><br><span class="line">  var a = 1</span><br><span class="line">   function f1()&#123;</span><br><span class="line">     console.log(a)</span><br><span class="line">   &#125;</span><br><span class="line">  return f1</span><br><span class="line">&#125;</span><br><span class="line">var fn = f()</span><br><span class="line">fn()//控制台输出结果为 1</span><br></pre></td></tr></table></figure><br>上面代码中，函数f的返回值是函数f1，因为函数f1可以获取其声明所在的作用域(即函数f内部作用域)中的a，<br>因此可以在函数外部获取函数内部变量。<br>而函数f1就是闭包，所以可以简单的把闭包理解为“函数内部的函数”。</p>
+<p>2、循环创建闭包的一个问题<br>html部分代码：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">  &lt;li&gt;第1个&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;第2个&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;第3个&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;第4个&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;第5个&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;第6个&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure><br>JavaScript部分代码：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function clickList()&#123;</span><br><span class="line">    var liList = document.querySelectorAll(&#x27;li&#x27;)</span><br><span class="line">    for(var i = 0;i&lt;liList.length;i++)&#123;</span><br><span class="line">           liList[i].onclick = function()&#123;</span><br><span class="line">           console.log(i + 1)</span><br><span class="line">           &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">clickList()</span><br></pre></td></tr></table></figure><br>当点击列表时发现，无论点击哪一个控制台输出都是 7。<br>原因是赋值给onclick的是闭包，这六个闭包在循环中被创建，但他们共享了同一个词法作用域。<br>由于循环在事件触发之前已经执行完毕，所以i的值已经为7了。<br>解决的一种办法就是使用let：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function clickList()&#123;</span><br><span class="line">    var liList = document.querySelectorAll(&#x27;li&#x27;)</span><br><span class="line">    for(let i = 0;i&lt;liList.length;i++)&#123;</span><br><span class="line">           liList[i].onclick = function()&#123;</span><br><span class="line">           console.log(i + 1)</span><br><span class="line">           &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">clickList()</span><br></pre></td></tr></table></figure><br>这样就使得每个闭包都绑定一个块级作用域，从而在点击列表时得到对应的值。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/06/20/%E9%97%AD%E5%8C%85/" data-id="ckpox1ltb000dwgu01dkh1zhe" data-title="闭包" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-封装一个全局函数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/05/19/%E5%B0%81%E8%A3%85%E4%B8%80%E4%B8%AA%E5%85%A8%E5%B1%80%E5%87%BD%E6%95%B0/" class="article-date">
+  <time class="dt-published" datetime="2018-05-19T01:59:39.000Z" itemprop="datePublished">2018-05-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/05/19/%E5%B0%81%E8%A3%85%E4%B8%80%E4%B8%AA%E5%85%A8%E5%B1%80%E5%87%BD%E6%95%B0/">封装一个全局函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1、封装一个全局函数用以操作html元素。<br>(1)html部分代码如下：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;Hello&lt;/div&gt;</span><br><span class="line">&lt;div&gt;Hello&lt;/div&gt;</span><br><span class="line">&lt;div&gt;Hello&lt;/div&gt;</span><br></pre></td></tr></table></figure><br>在页面上创建三个div元素，文本内容Hello、</p>
+<p>(2)css部分代码如下：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.red&#123;</span><br><span class="line">color:red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>(3)JS代码如下：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">window.$ = function(node)&#123;</span><br><span class="line"></span><br><span class="line">let nodes = document.querySelectorAll(node);</span><br><span class="line">  </span><br><span class="line">nodes.addClass = function(classes)&#123;</span><br><span class="line">for(let i = 0;i&lt;nodes.length;i++)</span><br><span class="line">  nodes[i].classList.add(classes);</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">nodes.setText = function(text)&#123;</span><br><span class="line">for(let i = 0;i&lt;nodes.length;i++)</span><br><span class="line">  nodes[i].textContent = text;</span><br><span class="line">&#125;</span><br><span class="line">return nodes;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、调用该函数<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var $div = $(&#x27;div&#x27;);  </span><br><span class="line">$div.addClass(&#x27;red&#x27;);  //为div元素添加上&quot;red&quot;类</span><br><span class="line">$div.setText(&#x27;hi&#x27;);    //将div文本内容置为hi</span><br></pre></td></tr></table></figure></p>
+<p>执行上述代码使得所有div元素文本内容变为红色且文本内容变为hi。<br>上述代码首先通过API  document.querySelectorAll()返回一个对象获得所有div元素，<br>然后add()方法和textContent属性分别为div元素加上”red”类名和替换文本内容为hi。</p>
+<p>document.querySelectorAll()不仅可以接受标签名(如div、span等等)，也可以接受选择器。<br>如果将html部分代码改为<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id = &quot;id&quot;&gt;Hello&lt;/div&gt;</span><br><span class="line">&lt;div&gt;Hello&lt;/div&gt;</span><br><span class="line">&lt;div&gt;Hello&lt;/div&gt;</span><br></pre></td></tr></table></figure><br>在调用函数时改为<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var $div = $(&#x27;#id&#x27;);  </span><br><span class="line">$div.addClass(&#x27;red&#x27;);  </span><br><span class="line">$div.setText(&#x27;hi&#x27;);   </span><br></pre></td></tr></table></figure><br>则只会改变第一个div的文本内容与颜色。</p>
+<p>当然，也可以为不同的div加上不同的class、不同的文本内容；<br>先添加一些颜色以备后用，css部分代码如下：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.red&#123;color:red;&#125;</span><br><span class="line">.blue&#123;color:blue;&#125;</span><br><span class="line">.green&#123;color:green;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>JS部分代码也要做出相应调整，JS部分代码如下：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">    window.$ = function(node)&#123;</span><br><span class="line"></span><br><span class="line">    let nodes = document.querySelectorAll(node);</span><br><span class="line">  </span><br><span class="line">    nodes.addClass = function(classes)&#123;</span><br><span class="line">    for(let i = 0;i&lt;nodes.length;i++)</span><br><span class="line">      nodes[i].classList.add(classes[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    nodes.setText = function(text)&#123;</span><br><span class="line">    for(let i = 0;i&lt;nodes.length;i++)</span><br><span class="line">      nodes[i].textContent = text[i];</span><br><span class="line">    &#125;</span><br><span class="line">    return nodes;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在调用函数通过传入classes数组以及text数值，实现为不同的div加上不同的class、不同的文本内容：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var $div = $(&#x27;div&#x27;);  </span><br><span class="line">$div.addClass([&quot;red&quot;,&quot;blue&quot;,&quot;green&quot;]);  </span><br><span class="line">$div.setText([&quot;你&quot;,&quot;我&quot;,&quot;他&quot;]);   </span><br></pre></td></tr></table></figure><br>显示的就是不同的div有着不同的内容与颜色。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/05/19/%E5%B0%81%E8%A3%85%E4%B8%80%E4%B8%AA%E5%85%A8%E5%B1%80%E5%87%BD%E6%95%B0/" data-id="ckpox1lt80009wgu02a2b67cq" data-title="封装一个全局函数" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+  </nav>
 
 </section>
         
@@ -140,7 +571,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
     </div>
   </div>
 
@@ -154,6 +585,22 @@
         
           <li>
             <a href="/2021/06/09/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/10/%E5%88%A4%E6%96%ADJS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95/">判断JS数据类型的方法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/12/REM/">REM</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/11/flex%E5%B8%83%E5%B1%80/">flex布局</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/02/webpack%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">webpack的安装与配置</a>
           </li>
         
       </ul>

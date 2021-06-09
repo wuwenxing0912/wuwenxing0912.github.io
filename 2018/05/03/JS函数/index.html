@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>JS函数 | 小吴的Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1、函数概念    函数是一组执行任务或计算值得语句。 2、函数声明JS中有两种常用的声明函数的方法(1)function命令    123funtion square(a)&amp;#123;    return a*a;&amp;#125;(2)函数表达式    123var square &#x3D; funtion(a)&amp;#123;    return a*a;&amp;#125;;此函数声明的方式不需要带有函数名，如果加">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS函数">
+<meta property="og:url" content="http://example.com/2018/05/03/JS%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="小吴的Blog">
+<meta property="og:description" content="1、函数概念    函数是一组执行任务或计算值得语句。 2、函数声明JS中有两种常用的声明函数的方法(1)function命令    123funtion square(a)&amp;#123;    return a*a;&amp;#125;(2)函数表达式    123var square &#x3D; funtion(a)&amp;#123;    return a*a;&amp;#125;;此函数声明的方式不需要带有函数名，如果加">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-05-03T06:19:16.000Z">
+<meta property="article:modified_time" content="2018-05-03T06:19:48.560Z">
+<meta property="article:author" content="xing">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="小吴的Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">小吴的Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-JS函数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/05/03/JS%E5%87%BD%E6%95%B0/" class="article-date">
+  <time class="dt-published" datetime="2018-05-03T06:19:16.000Z" itemprop="datePublished">2018-05-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      JS函数
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1、函数概念<br>    函数是一组执行任务或计算值得语句。</p>
+<p>2、函数声明<br>JS中有两种常用的声明函数的方法<br>(1)function命令<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">funtion square(a)&#123;</span><br><span class="line">    return a*a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>(2)函数表达式<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var square = funtion(a)&#123;</span><br><span class="line">    return a*a;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><br>此函数声明的方式不需要带有函数名，如果加上函数名，函数名只在函数体内部有效，在函数体外部无效。且此种声明方式需要在花括号后加上分号。<br>3、函数名提升<br>浏览器把函数名看作成为变量名，因此在采用function命令声明函数时，函数会和变量声明一样提升到代码头部。<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f();</span><br><span class="line">function f()&#123;&#125;</span><br></pre></td></tr></table></figure><br>上述代码不会报错，上述等同于下方<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function f()&#123;&#125;</span><br><span class="line">f()</span><br></pre></td></tr></table></figure><br>但是使用函数表达式声明函数时却会报错<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f();</span><br><span class="line">var f = function()&#123;&#125;</span><br></pre></td></tr></table></figure><br>上面代码等同于<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var f;</span><br><span class="line">f();</span><br><span class="line">f = function()&#123;&#125;</span><br></pre></td></tr></table></figure><br>上述代码调用f时，f只是被声明却没有赋值（undefined）。<br>4、函数的属性与方法<br>(1)、name属性<br>name属性用以返回函数的名字，如：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function add()&#123;&#125;</span><br><span class="line">add.name//得到函数名&quot;add&quot;</span><br></pre></td></tr></table></figure><br>对于使用函数表达式声明函数返回的是变量名,如:<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var add = function()&#123;&#125;;</span><br><span class="line">add.name//得到变量名&quot;add&quot;</span><br></pre></td></tr></table></figure><br>(2)、length属性<br>length属性用于返回函数的参数个数，如：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function add(x,y)&#123;&#125;</span><br><span class="line">add.length//值为2</span><br></pre></td></tr></table></figure><br>(3)、toString()方法<br>toString方法返回的内容是整个函数的源代码,如：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function add(x,y)&#123;</span><br><span class="line">    return x+y</span><br><span class="line">&#125;</span><br><span class="line">add.toString()</span><br></pre></td></tr></table></figure><br>    得到<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function f(a,b)&#123;</span><br><span class="line"> return a+b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/05/03/JS%E5%87%BD%E6%95%B0/" data-id="ckpox1lsz0001wgu0351k3z9v" data-title="JS函数" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/04/JS%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          JS函数作用域
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/03/%E7%A9%BA%E6%A0%87%E7%AD%BE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">空标签</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/06/09/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/10/%E5%88%A4%E6%96%ADJS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95/">判断JS数据类型的方法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/12/REM/">REM</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/11/flex%E5%B8%83%E5%B1%80/">flex布局</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/02/webpack%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">webpack的安装与配置</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 xing<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>判断JS数据类型的方法 | 小吴的Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="在 ECMAScript 规范中，一共有7种数据类型，分别为：Number、String、Boolean、Null、Undefined、Symbol、Object。其中Number、String、Boolean、Null、Undefined、Symbol为基本类型，Object为引用类型或称复杂类型。 1、typeoftypeof 是一个操作符，右侧跟一个一元表达式，并返回这个表达式的数据类型。返">
+<meta property="og:type" content="article">
+<meta property="og:title" content="判断JS数据类型的方法">
+<meta property="og:url" content="http://example.com/2018/08/10/%E5%88%A4%E6%96%ADJS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="小吴的Blog">
+<meta property="og:description" content="在 ECMAScript 规范中，一共有7种数据类型，分别为：Number、String、Boolean、Null、Undefined、Symbol、Object。其中Number、String、Boolean、Null、Undefined、Symbol为基本类型，Object为引用类型或称复杂类型。 1、typeoftypeof 是一个操作符，右侧跟一个一元表达式，并返回这个表达式的数据类型。返">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-08-09T16:25:37.000Z">
+<meta property="article:modified_time" content="2018-08-09T17:51:08.880Z">
+<meta property="article:author" content="xing">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="小吴的Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">小吴的Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-判断JS数据类型的方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/08/10/%E5%88%A4%E6%96%ADJS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2018-08-09T16:25:37.000Z" itemprop="datePublished">2018-08-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      判断JS数据类型的方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在 ECMAScript 规范中，一共有7种数据类型，分别为：<br>Number、String、Boolean、Null、Undefined、Symbol、Object。<br>其中Number、String、Boolean、Null、Undefined、Symbol为基本类型，Object为引用类型或称复杂类型。</p>
+<p>1、typeof<br>typeof 是一个操作符，右侧跟一个一元表达式，并返回这个表达式的数据类型。返回的结果用该类型的字符串(全小写字母)形式表示。如下:<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">typeof 123 //&quot;number&quot;</span><br><span class="line">typeof &#x27;123&#x27; //&quot;string&quot;</span><br><span class="line">typeof true //&quot;boolean&quot;</span><br><span class="line">typeof undefined //&quot;undefined&quot;</span><br><span class="line">typeof Symbol(&#x27;123&#x27;) //&quot;symbol&quot;</span><br><span class="line">typeof &#123;&#125; //&quot;object&quot;</span><br><span class="line">typeof function f()&#123;&#125; //&quot;function&quot;</span><br><span class="line">typeof new Array() //&quot;object&quot;</span><br><span class="line">typeof new Date() //&quot;object&quot;</span><br></pre></td></tr></table></figure><br>所以，typeof的返回值有7种分别是：number、boolean、symbol、string、object、undefined、function 。<br>需要注意的是null返回的是”object”，函数返回的是”function”,其余均符合预期结果。</p>
+<p>2、instanceof<br>instanceof运算符返回一个布尔值(true/false)，表示对象是否为某个构造函数的实例。<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function A()&#123;&#125;</span><br><span class="line">var a = new A()</span><br><span class="line">a instanceof A //true</span><br></pre></td></tr></table></figure></p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;str&quot; instanceof String //false 字符串不是String对象的实例（因为字符串不是对象），//所以返回false。</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>需要注意的是instanceof运算符只能用于对象，不适用原始类型的值。<br>此外instanceof检查整个原型链，因此同一个实例对象，可能会对多个构造函数都返回true。如：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[] instanceof Array // true</span><br><span class="line">[] instanceof Object //true</span><br></pre></td></tr></table></figure><br>上述情况成立的原因是：[].<strong>proto</strong>.<strong>proto</strong> === Object.prototype //true。<br>其中[].<strong>proto</strong> === Array.prototype //true,<br>Array.prototype.<strong>proto</strong> === Object.prototype//true</p>
+<p>3、toString方法<br>toString() 是 Object 的原型方法，这是一个内部属性，其格式为 [object Xxx] ，其中 Xxx 就是对象的类型。<br>对于 Object 对象，直接调用 toString()  就能返回 [object Object] 。而对于其他对象，则需要通过 call / apply 来调用才能返回正确的类型信息。<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Object.prototype.toString.call(123) //&quot;[object Number]&quot;</span><br><span class="line">Object.prototype.toString.call(&#x27;123&#x27;) //&quot;[object String]&quot;</span><br><span class="line">Object.prototype.toString.call(true) //&quot;[object Boolean]&quot;</span><br><span class="line">Object.prototype.toString.call(null) //&quot;[object Null]&quot;</span><br><span class="line">Object.prototype.toString.call(undefined) //&quot;[object Undefined]&quot;</span><br><span class="line">Object.prototype.toString.call(Symbol(&#x27;123&#x27;)) //&quot;[object Symbol]&quot;</span><br><span class="line">Object.prototype.toString.call(&#123;&#125;) //&quot;[object Object]&quot;</span><br><span class="line">Object.prototype.toString.call([]) //&quot;[object Array]&quot;</span><br><span class="line">Object.prototype.toString.call(function f()&#123;&#125;) //&quot;[object Function]&quot;</span><br><span class="line">Object.prototype.toString.call(new Date()) //&quot;[object Date]&quot;</span><br><span class="line">Object.prototype.toString.call(new RegExp()) //&quot;[object RegExp]&quot;</span><br></pre></td></tr></table></figure><br>由此可见使用Object.prototype.toString.call()方法可返回正确的类型。<br>在实际中可使用slice()方法截取所需要的值：<br>    <code>    Object.prototype.toString.call(function f()&#123;&#125;).slice(8,-1) //&quot;Function&quot;     Object.prototype.toString.call([]).slice(8,-1) // &quot;Array&quot;     Object.prototype.toString.call(true).slice(8,-1) //&quot;Boolean&quot;    </code>  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/08/10/%E5%88%A4%E6%96%ADJS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95/" data-id="ckpox1lt50008wgu0da2wa3xt" data-title="判断JS数据类型的方法" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/06/09/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/12/REM/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">REM</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/06/09/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/10/%E5%88%A4%E6%96%ADJS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95/">判断JS数据类型的方法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/12/REM/">REM</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/11/flex%E5%B8%83%E5%B1%80/">flex布局</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/02/webpack%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">webpack的安装与配置</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 xing<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

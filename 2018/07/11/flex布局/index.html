@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>flex布局 | 小吴的Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一、flex布局flex布局（Flexible Box）意为”弹性布局”，可以实现空间的自动分配，自动对齐。使用flex布局的元素，称为flex容器（flex container），它的所有子元素自动成为容器成员，称为flex item。容器默认存在两根轴：水平的主轴（main axis）和垂直的侧轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flex布局">
+<meta property="og:url" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/index.html">
+<meta property="og:site_name" content="小吴的Blog">
+<meta property="og:description" content="一、flex布局flex布局（Flexible Box）意为”弹性布局”，可以实现空间的自动分配，自动对齐。使用flex布局的元素，称为flex容器（flex container），它的所有子元素自动成为容器成员，称为flex item。容器默认存在两根轴：水平的主轴（main axis）和垂直的侧轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做m">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/flex.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/row.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/row-reverse.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/column.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/column-reverse.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/nowrap.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/wrap.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/wrap-reverse.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/flex-flow.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/flex-start.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/flex-end.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/center.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/space-between.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/space-around.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/align-items-flex-start.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/align-items-flex-end.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/align-items-center.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/align-items-baseline.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/align-items-stretch.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/align-content-flex-start.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/align-content-flex-end.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/align-content-center.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/align-content-space-between.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/align-content-space-around.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/align-content-stretch.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/order.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/flex-grow.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/flex-grow-2.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/flex-shrink.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/flex-shrink-2.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/flex-basis.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/flex-auto.jpg">
+<meta property="og:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/align-self.jpg">
+<meta property="article:published_time" content="2018-07-11T08:26:50.000Z">
+<meta property="article:modified_time" content="2018-07-11T10:42:40.486Z">
+<meta property="article:author" content="xing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/flex%E5%B8%83%E5%B1%80/flex.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="小吴的Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">小吴的Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-flex布局" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/07/11/flex%E5%B8%83%E5%B1%80/" class="article-date">
+  <time class="dt-published" datetime="2018-07-11T08:26:50.000Z" itemprop="datePublished">2018-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      flex布局
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>一、flex布局<br>flex布局（Flexible Box）意为”弹性布局”，可以实现空间的自动分配，自动对齐。<br>使用flex布局的元素，称为flex容器（flex container），它的所有子元素自动成为容器成员，称为flex item。<br>容器默认存在两根轴：水平的主轴（main axis）和垂直的侧轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；侧轴的开始位置叫做cross start，结束位置叫做cross end。<br><img src="flex%E5%B8%83%E5%B1%80/flex.jpg" alt="展示图"></p>
+<p>二、容器属性<br>容器上有6个属性：flex-direction、flex-wrap、flex-flow、justify-content、align-items、align-content。</p>
+<p>1、flex-direction属性确定主轴的方向，flex-direction属性有4个值可选：<br>flex-direction：row; 主轴为水平方向，起点在左端（默认值）<br><img src="flex%E5%B8%83%E5%B1%80/row.jpg" alt="展示图"></p>
+<p>flex-direction：row-reverse; 主轴为水平方向，起点在右端。<br><img src="flex%E5%B8%83%E5%B1%80/row-reverse.jpg" alt="展示图"></p>
+<p>flex-direction：column; 主轴为垂直方向，起点在上方。<br><img src="flex%E5%B8%83%E5%B1%80/column.jpg" alt="展示图"></p>
+<p>flex-direction：column-reverse; 主轴为垂直方向，起点在下方。<br><img src="flex%E5%B8%83%E5%B1%80/column-reverse.jpg" alt="展示图"></p>
+<p>2、flex-wrap属性确定是否换行，flex-wrap属性有3个值可选：<br>flex-wrap：nowrap; 不换行（默认值）<br><img src="flex%E5%B8%83%E5%B1%80/nowrap.jpg" alt="展示图"></p>
+<p>flex-wrap：wrap; 换行，第一行在上方。<br><img src="flex%E5%B8%83%E5%B1%80/wrap.jpg" alt="展示图"></p>
+<p>flex-wrap：wrap-reverse; 换行，第一行在下方。<br><img src="flex%E5%B8%83%E5%B1%80/wrap-reverse.jpg" alt="展示图"></p>
+<p>3、flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。<br>flex-flow：row wrap;<br><img src="flex%E5%B8%83%E5%B1%80/flex-flow.jpg" alt="展示图"></p>
+<p>4、justify-content属性定义了item在主轴上的对齐方式。justify-content属性有5个值可选：<br>justify-content:flex-start; 左对齐（默认值）<br><img src="flex%E5%B8%83%E5%B1%80/flex-start.jpg" alt="展示图"></p>
+<p>justify-content:flex-end; 右对齐<br><img src="flex%E5%B8%83%E5%B1%80/flex-end.jpg" alt="展示图"></p>
+<p>justify-content:center; 居中<br><img src="flex%E5%B8%83%E5%B1%80/center.jpg" alt="展示图"></p>
+<p>justify-content:space-between; 两端对齐，item之间的间隔都相等。<br><img src="flex%E5%B8%83%E5%B1%80/space-between.jpg" alt="展示图"></p>
+<p>justify-content:space-around; 每个item两侧的间隔相等，所以，item之间的间隔比item与边框的间隔大一倍。<br><img src="flex%E5%B8%83%E5%B1%80/space-around.jpg" alt="展示图"></p>
+<p>5、align-items属性定义item在侧轴上如何对齐。align-items属性有5个值可选：<br>align-items:flex-start; 侧轴的起点对齐。<br><img src="flex%E5%B8%83%E5%B1%80/align-items-flex-start.jpg" alt="展示图"></p>
+<p>align-items:flex-end; 侧轴的终点对齐。<br><img src="flex%E5%B8%83%E5%B1%80/align-items-flex-end.jpg" alt="展示图"></p>
+<p>align-items:center; 侧轴的中点对齐。<br><img src="flex%E5%B8%83%E5%B1%80/align-items-center.jpg" alt="展示图"></p>
+<p>align-items:baseline; item的第一行文字的基线对齐。<br><img src="flex%E5%B8%83%E5%B1%80/align-items-baseline.jpg" alt="展示图"></p>
+<p>align-items:stretch; 如果item未设置高度或设为auto，将占满整个容器的高度。<br><img src="flex%E5%B8%83%E5%B1%80/align-items-stretch.jpg" alt="展示图"></p>
+<p>6、align-content属性定义多行/多列对齐方式。align-content属性有6个值可选：<br>align-content:flex-start; 与侧轴的起点对齐。<br><img src="flex%E5%B8%83%E5%B1%80/align-content-flex-start.jpg" alt="展示图"></p>
+<p>align-content:flex-end; 与侧轴的终点对齐。<br><img src="flex%E5%B8%83%E5%B1%80/align-content-flex-end.jpg" alt="展示图"></p>
+<p>align-content:center; 与侧轴的中点对齐。<br><img src="flex%E5%B8%83%E5%B1%80/align-content-center.jpg" alt="展示图"></p>
+<p>align-content:space-between; 侧轴两端对齐，轴线之间的间隔平均分布。<br><img src="flex%E5%B8%83%E5%B1%80/align-content-space-between.jpg" alt="展示图"></p>
+<p>align-content:space-around; 每根轴线两侧的间隔都相等，所以，轴线之间的间隔比轴线与边框的间隔大一倍。<br><img src="flex%E5%B8%83%E5%B1%80/align-content-space-around.jpg" alt="展示图"></p>
+<p>align-content:stretch; 轴线占满整个侧轴（默认值）。<br><img src="flex%E5%B8%83%E5%B1%80/align-content-stretch.jpg" alt="展示图"></p>
+<p>三、item属性<br>item上有6个属性order、flex-grow、flex-shrink、flex-basis、flex、align-self。<br>1、order属性定义item的排列顺序。数值越小，排列越靠前，默认为0。<br>order:1;<br><img src="flex%E5%B8%83%E5%B1%80/order.jpg" alt="展示图"></p>
+<p>2、flex-grow属性定义item的放大比例，默认为0，即如果存在剩余空间，也不放大。<br>如果所有item的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。<br>如果一个item的flex-grow属性为2，其他item都为1，则前者占据的剩余空间将比其他项多一倍。<br>flex-grow:1;<br><img src="flex%E5%B8%83%E5%B1%80/flex-grow.jpg" alt="展示图"></p>
+<p>flex-grow:2;<br><img src="flex%E5%B8%83%E5%B1%80/flex-grow-2.jpg" alt="展示图"></p>
+<p>3、flex-shrink属性定义了item的缩小比例，默认为1，即如果空间不足，该item将缩小。<br>如果所有item的flex-shrink属性都为1，当空间不足时，都将等比例缩小。<br>如果一个item的flex-shrink属性为0，其他item都为1，则空间不足时，前者不缩小。<br>flex-shrink:1;<br><img src="flex%E5%B8%83%E5%B1%80/flex-shrink.jpg" alt="展示图"></p>
+<p>flex-shrink:0;<br><img src="flex%E5%B8%83%E5%B1%80/flex-shrink-2.jpg" alt="展示图"></p>
+<p>4、flex-basis属性定义了在分配多余空间之前，item占据的主轴空间（main size）。<br>浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即item的本来大小。<br>它可以设为跟width或height属性一样的值，则item将占据固定空间。<br>flex-basis:230px;<br><img src="flex%E5%B8%83%E5%B1%80/flex-basis.jpg" alt="展示图"></p>
+<p>5、flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。<br>flex:1 1 230px;<br><img src="flex%E5%B8%83%E5%B1%80/flex-auto.jpg" alt="展示图"></p>
+<p>6、align-self属性允许单个item有与其他item不一样的对齐方式，可覆盖align-items属性。默认值为auto，<br>表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。<br>align-self:flex-end;<br><img src="flex%E5%B8%83%E5%B1%80/align-self.jpg" alt="展示图"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/07/11/flex%E5%B8%83%E5%B1%80/" data-id="ckpox1lt20004wgu05ab280qf" data-title="flex布局" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/07/12/REM/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          REM
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/02/webpack%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">webpack的安装与配置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/06/09/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/10/%E5%88%A4%E6%96%ADJS%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95/">判断JS数据类型的方法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/12/REM/">REM</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/11/flex%E5%B8%83%E5%B1%80/">flex布局</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/02/webpack%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">webpack的安装与配置</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 xing<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
