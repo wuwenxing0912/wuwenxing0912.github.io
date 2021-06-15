@@ -249,6 +249,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/15/%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8EHexo5%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小吴的Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/06/15/%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8EHexo5%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" itemprop="url">搭建基于Hexo5博客遇到的问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-15T10:56:26+08:00">
+                2021-06-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>早些时候使用Hexo 4成功搭建了个人博客。现在更换了电脑，生成博客的源代码也没有备份，只好重头开始。Hexo已经更新到5.4.0，与Hexo 4有些不同，所以开篇博客记录在安装时遇到的问题(本文的操作平台是Windows 10环境)。</p>
+<h1 id="hexo-init"><a href="#hexo-init" class="headerlink" title="hexo init"></a>hexo init</h1><p>与Hexo 4不同的是，使用Hexo 5就倒在了第一步：初始化失败。报错内容大致如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">INFO  Cloning hexo-starter https:<span class="comment">//github.com/hexojs/hexo-starter.git</span></span><br><span class="line">fatal: unable to access <span class="string">&#x27;https://github.com/xxx&#x27;</span>: OpenSSL SSL_connect: SSL_ERROR_SYSCALL <span class="keyword">in</span> connection to github.com:<span class="number">443</span></span><br><span class="line">WARN  git clone failed. Copying data instead</span><br><span class="line">FATAL &#123;</span><br><span class="line">  <span class="attr">err</span>: [<span class="built_in">Error</span>: ENOENT: no such file or directory, scandir <span class="string">&#x27;C:\Users\xxx\AppData\Roaming\npm\node_modules\hexo-cli\assets&#x27;</span>] &#123;</span><br><span class="line">    <span class="attr">errno</span>: -<span class="number">4058</span>,</span><br><span class="line">    <span class="attr">code</span>: <span class="string">&#x27;ENOENT&#x27;</span>,</span><br><span class="line">    <span class="attr">syscall</span>: <span class="string">&#x27;scandir&#x27;</span>,</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;C:\\Users\\xxx\\AppData\\Roaming\\npm\\node_modules\\hexo-cli\\assets&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125; Something<span class="string">&#x27;s wrong. Maybe you can find the solution here: %s http://hexo.io/docs/troubleshooting.html</span></span><br></pre></td></tr></table></figure>
+
+<p>在搜索解决方法时，有些答案认为是因为github被墙或者是git设置了http代理所导致，对于前者我试着挂好了梯子(github、google均能正常使用)初始化仍然失败；接着检查了http代理也不存在问题。</p>
+<p>最后的解决办法是：替换github链接。首先在你的电脑找到init.js文件，大致路径：C:\Users\xxx\AppData\Roaming\npm\node_modules\hexo-cli\lib\console\init.js，搜索GIT_REPO_URL字段后做如下替换：</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/06/15/%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8EHexo5%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/11/%E6%89%8B%E5%86%99%E7%B3%BB%E5%88%97%E4%B9%8B%E4%BA%8C%EF%BC%9AEventHub/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1567,152 +1718,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/20/%E9%97%AD%E5%8C%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小吴的Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/20/%E9%97%AD%E5%8C%85/" itemprop="url">闭包</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-20T23:24:10+08:00">
-                2018-06-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="1、闭包的概念"><a href="#1、闭包的概念" class="headerlink" title="1、闭包的概念"></a>1、闭包的概念</h1><p>根据MDN的定义：闭包(closure)是函数和声明该函数的词法环境(词法作用域)的组合。<br>其中词法作用域是指代码编写时变量所处的作用域。<br>在ES5中有两种作用域：全局作用域和函数作用域。<br>函数内部可以直接读取全局变量：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = 1</span><br><span class="line">function f()&#123;</span><br><span class="line">console.log(a)</span><br><span class="line">&#125;</span><br><span class="line">f()//控制台输出结果为 1</span><br></pre></td></tr></table></figure><br>但是函数外部不能获取函数内部的变量：</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/20/%E9%97%AD%E5%8C%85/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1768,7 +1773,7 @@
                 <!--<a href="/archives/%7C%7C%20archive">-->
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1779,7 +1784,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1790,7 +1795,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
