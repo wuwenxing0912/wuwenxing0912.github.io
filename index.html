@@ -249,6 +249,223 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/20/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EReact%E7%9A%84Button%E7%BB%84%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小吴的Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/06/20/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EReact%E7%9A%84Button%E7%BB%84%E4%BB%B6/" itemprop="url">实现一个基于React的Button组件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-20T17:18:44+08:00">
+                2021-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/TypeScript/" itemprop="url" rel="index">
+                    <span itemprop="name">TypeScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><p>在开始编写Button组件之前，首先构思Button需要提供的API，然后按照API的要求着手实现。API具体如下：</p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>说明</th>
+<th>默认值</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>button类型</td>
+<td>default</td>
+<td>“default” | “primary” | “dashed” | “danger”</td>
+</tr>
+<tr>
+<td>className</td>
+<td>自定义类名</td>
+<td>—</td>
+<td>string</td>
+</tr>
+<tr>
+<td>style</td>
+<td>自定义样式</td>
+<td>—</td>
+<td>React.CSSProperties</td>
+</tr>
+<tr>
+<td>disabled</td>
+<td>按钮禁用状态</td>
+<td>false</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>ghost</td>
+<td>幽灵按钮，背景透明</td>
+<td>false</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>size</td>
+<td>按钮尺寸大小</td>
+<td>middle</td>
+<td>“large” | “middle” | “small”</td>
+</tr>
+<tr>
+<td>icon</td>
+<td>自定义按钮图标</td>
+<td>—</td>
+<td>string</td>
+</tr>
+<tr>
+<td>onClick</td>
+<td>点击按钮时的回调</td>
+<td>—</td>
+<td>React.MouseEventHandler</td>
+</tr>
+</tbody></table>
+<p>根据上述要求，那么就可以这样设计 Props ：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Props &#123;</span><br><span class="line">	<span class="keyword">type</span>?: <span class="string">&quot;default&quot;</span> | <span class="string">&quot;primary&quot;</span> | <span class="string">&quot;dashed&quot;</span> | <span class="string">&quot;danger&quot;</span>;</span><br><span class="line">	className?: <span class="built_in">string</span>;</span><br><span class="line">	style?: React.CSSProperties;</span><br><span class="line">	disabled?: <span class="built_in">boolean</span>;</span><br><span class="line">	ghost?: <span class="built_in">boolean</span>;</span><br><span class="line">	size?: <span class="string">&quot;large&quot;</span> | <span class="string">&quot;middle&quot;</span> | <span class="string">&quot;small&quot;</span>;</span><br><span class="line">	icon?: <span class="built_in">string</span>;</span><br><span class="line">	onClick?: React.MouseEventHandler;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Button.defaultProps = &#123;</span><br><span class="line">	<span class="attr">type</span>: <span class="string">&quot;default&quot;</span>,</span><br><span class="line">	<span class="attr">disabled</span>: <span class="literal">false</span>,</span><br><span class="line">	<span class="attr">ghost</span>: <span class="literal">false</span>,</span><br><span class="line">	<span class="attr">size</span>: <span class="string">&quot;middle&quot;</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/06/20/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EReact%E7%9A%84Button%E7%BB%84%E4%BB%B6/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/15/%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8EHexo5%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1571,153 +1788,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/21/MVC%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小吴的Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/21/MVC%E6%A8%A1%E5%BC%8F/" itemprop="url">MVC模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-21T15:36:33+08:00">
-                2018-06-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="一、什么是MVC"><a href="#一、什么是MVC" class="headerlink" title="一、什么是MVC"></a>一、什么是MVC</h1><p>Model操作数据、View表示视图、Controller是控制器。<br>Model和服务器交互，Model将得到的数据交给Controller，Controller把数据填入View并监听View。<br>用户操作View，如点击按钮，Controller就会接受到点击事件，Controller这时会去调用Model，Model会与服务器交互，得到数据后返回给Controller，Controller得到数据就去更新View。</p>
-<h1 id="二、使用MVC制作一个留言板"><a href="#二、使用MVC制作一个留言板" class="headerlink" title="二、使用MVC制作一个留言板"></a>二、使用MVC制作一个留言板</h1>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/21/MVC%E6%A8%A1%E5%BC%8F/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1773,7 +1843,7 @@
                 <!--<a href="/archives/%7C%7C%20archive">-->
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1784,7 +1854,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1795,7 +1865,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
