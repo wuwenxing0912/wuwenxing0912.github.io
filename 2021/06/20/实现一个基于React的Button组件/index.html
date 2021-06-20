@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="API在开始编写Button组件之前，首先构思Button需要提供的API，然后按照API的要求着手实现。API具体如下：    API 说明 默认值 类型    type button类型 default “default” | “primary” | “dashed” | “danger”   className 自定义类名 — string   style 自定义样式 — React.CSS">
+<meta name="description" content="API在开始编写 Button组件 之前，首先构思 Button 需要提供的 API，然后按照 API 的要求着手实现。API 具体如下：    API 说明 默认值 类型    type button类型 default “default” | “primary” | “dashed” | “danger”   className 自定义类名 — string   style 自定义样式 — R">
 <meta property="og:type" content="article">
 <meta property="og:title" content="实现一个基于React的Button组件">
 <meta property="og:url" content="http://example.com/2021/06/20/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EReact%E7%9A%84Button%E7%BB%84%E4%BB%B6/index.html">
 <meta property="og:site_name" content="小吴的Blog">
-<meta property="og:description" content="API在开始编写Button组件之前，首先构思Button需要提供的API，然后按照API的要求着手实现。API具体如下：    API 说明 默认值 类型    type button类型 default “default” | “primary” | “dashed” | “danger”   className 自定义类名 — string   style 自定义样式 — React.CSS">
+<meta property="og:description" content="API在开始编写 Button组件 之前，首先构思 Button 需要提供的 API，然后按照 API 的要求着手实现。API 具体如下：    API 说明 默认值 类型    type button类型 default “default” | “primary” | “dashed” | “danger”   className 自定义类名 — string   style 自定义样式 — R">
 <meta property="og:locale">
 <meta property="og:image" content="http://example.com/2021/06/20/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EReact%E7%9A%84Button%E7%BB%84%E4%BB%B6/type.jpg">
 <meta property="og:image" content="http://example.com/2021/06/20/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EReact%E7%9A%84Button%E7%BB%84%E4%BB%B6/disabled.jpg">
@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://example.com/2021/06/20/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EReact%E7%9A%84Button%E7%BB%84%E4%BB%B6/size.jpg">
 <meta property="og:image" content="http://example.com/2021/06/20/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EReact%E7%9A%84Button%E7%BB%84%E4%BB%B6/icon.jpg">
 <meta property="article:published_time" content="2021-06-20T09:18:44.000Z">
-<meta property="article:modified_time" content="2021-06-20T11:38:28.816Z">
+<meta property="article:modified_time" content="2021-06-20T11:42:12.226Z">
 <meta property="article:author" content="xing">
 <meta property="article:tag" content="React">
 <meta property="article:tag" content="Button">
@@ -360,7 +360,7 @@
       
 
       
-        <h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><p>在开始编写Button组件之前，首先构思Button需要提供的API，然后按照API的要求着手实现。API具体如下：</p>
+        <h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><p>在开始编写 <a target="_blank" rel="noopener" href="https://wuwenxing0912.github.io/react-ui-lib/home.html">Button组件</a> 之前，首先构思 Button 需要提供的 API，然后按照 API 的要求着手实现。API 具体如下：</p>
 <table>
 <thead>
 <tr>
@@ -424,7 +424,7 @@
 
 <span id="more"></span>
 
-<h1 id="type"><a href="#type" class="headerlink" title="type"></a>type</h1><p>button共有4种类型分别为：default(默认按钮)、primary(主题按钮)、dashed(虚线按钮)和danger(危险按钮)。type为可选参数，默认值为 default。每当传入 type 时，就相应的给 button 加上对应的类名，根据不同的类 button 的显示不同的样式。</p>
+<h1 id="type"><a href="#type" class="headerlink" title="type"></a>type</h1><p>button 共有4种类型分别为：default(默认按钮)、primary(主题按钮)、dashed(虚线按钮)和danger(危险按钮)。type 为可选参数，默认值为 default。每当传入 type 时，就相应的给 button 加上对应的类名，根据不同的类 button 的显示不同的样式。</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Button: React.FunctionComponent&lt;Props&gt; = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">const</span> &#123; <span class="keyword">type</span>, ...rest &#125; = props;</span><br><span class="line">	<span class="keyword">const</span> buttonClassName = classes(<span class="string">&quot;x-button&quot;</span>, <span class="keyword">type</span>); <span class="comment">//classes 能够返回形如 x-button type 的类</span></span><br><span class="line">	<span class="keyword">return</span> (</span><br><span class="line">		<span class="xml"><span class="tag">&lt;<span class="name">Fragment</span>&gt;</span></span></span><br><span class="line"><span class="xml">		    <span class="tag">&lt;<span class="name">button</span> <span class="attr">className</span>=<span class="string">&#123;buttonClassName&#125;</span> &#123;<span class="attr">...rest</span>&#125;&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">		<span class="tag">&lt;/<span class="name">Fragment</span>&gt;</span></span></span><br><span class="line">	);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>设置 button type 代码如下：</p>
@@ -433,7 +433,7 @@
 <p>效果如下：</p>
 <img src="/2021/06/20/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EReact%E7%9A%84Button%E7%BB%84%E4%BB%B6/type.jpg" class title="type">
 
-<h1 id="disabled"><a href="#disabled" class="headerlink" title="disabled"></a>disabled</h1><p>disabled是可选参数，类型是 boolean，默认值为 false。当设置为 true 时，给 button 加上 disabled 类名，此时 button 为禁用状态。</p>
+<h1 id="disabled"><a href="#disabled" class="headerlink" title="disabled"></a>disabled</h1><p>disabled 是可选参数，类型是 boolean，默认值为 false。当设置为 true 时，给 button 加上 disabled 类名，此时 button 为禁用状态。</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Button: React.FunctionComponent&lt;Props&gt; = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">const</span> &#123; <span class="keyword">type</span>, ...rest &#125; = props;</span><br><span class="line">	<span class="keyword">const</span> disabled = props.disabled ? <span class="string">&quot;disabled&quot;</span> : <span class="literal">undefined</span>;<span class="comment">//disabled 为 true 时，加上 disabled 类</span></span><br><span class="line">	<span class="keyword">const</span> buttonClassName = classes(<span class="string">&quot;x-button&quot;</span>, <span class="keyword">type</span>, disabled);</span><br><span class="line">	<span class="keyword">return</span> (</span><br><span class="line">		<span class="xml"><span class="tag">&lt;<span class="name">Fragment</span>&gt;</span></span></span><br><span class="line"><span class="xml">		    <span class="tag">&lt;<span class="name">button</span> <span class="attr">className</span>=<span class="string">&#123;buttonClassName&#125;</span> &#123;<span class="attr">...rest</span>&#125;&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">		<span class="tag">&lt;/<span class="name">Fragment</span>&gt;</span></span></span><br><span class="line">	);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>设置 disabled 代码如下：</p>
@@ -442,7 +442,7 @@
 <p>效果如下：</p>
 <img src="/2021/06/20/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EReact%E7%9A%84Button%E7%BB%84%E4%BB%B6/disabled.jpg" class title="disabled">
 
-<h1 id="ghost"><a href="#ghost" class="headerlink" title="ghost"></a>ghost</h1><p>ghost是可选参数，类型是 boolean，默认值为 false。当设置为 true 时，给 button 加上 ghost 类名，此时 button 背景变为透明。</p>
+<h1 id="ghost"><a href="#ghost" class="headerlink" title="ghost"></a>ghost</h1><p>ghost 是可选参数，类型是 boolean，默认值为 false。当设置为 true 时，给 button 加上 ghost 类名，此时 button 背景变为透明。</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Button: React.FunctionComponent&lt;Props&gt; = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">const</span> &#123; <span class="keyword">type</span>, ...rest &#125; = props;</span><br><span class="line">	<span class="keyword">const</span> ghost = props.ghost ? <span class="string">&quot;ghost&quot;</span> : <span class="literal">undefined</span>;</span><br><span class="line">	<span class="keyword">const</span> buttonClassName = classes(<span class="string">&quot;x-button&quot;</span>, <span class="keyword">type</span>, ghost);</span><br><span class="line">	<span class="keyword">return</span> (</span><br><span class="line">		<span class="xml"><span class="tag">&lt;<span class="name">Fragment</span>&gt;</span></span></span><br><span class="line"><span class="xml">		    <span class="tag">&lt;<span class="name">button</span> <span class="attr">className</span>=<span class="string">&#123;buttonClassName&#125;</span> &#123;<span class="attr">...rest</span>&#125;&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">		<span class="tag">&lt;/<span class="name">Fragment</span>&gt;</span></span></span><br><span class="line">	);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>设置 ghost 代码如下：</p>
@@ -460,7 +460,7 @@
 <p>效果如下：</p>
 <img src="/2021/06/20/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EReact%E7%9A%84Button%E7%BB%84%E4%BB%B6/size.jpg" class title="size">
 
-<h1 id="icon"><a href="#icon" class="headerlink" title="icon"></a>icon</h1><p>icon是可选参数，类型是 string。</p>
+<h1 id="icon"><a href="#icon" class="headerlink" title="icon"></a>icon</h1><p>icon 是可选参数，类型是 string。</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Button: React.FunctionComponent&lt;Props&gt; = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">const</span> &#123; <span class="keyword">type</span>, ...rest &#125; = props;</span><br><span class="line">	<span class="keyword">const</span> icon = props.icon &amp;&amp; <span class="xml"><span class="tag">&lt;<span class="name">Icon</span> <span class="attr">name</span>=<span class="string">&#123;props.icon&#125;</span>&gt;</span><span class="tag">&lt;/<span class="name">Icon</span>&gt;</span></span>;<span class="comment">//使用 Icon 组件，name 匹配 icon 库中的icon</span></span><br><span class="line">	<span class="keyword">const</span> buttonClassName = classes(<span class="string">&quot;x-button&quot;</span>, <span class="keyword">type</span>);</span><br><span class="line">	<span class="keyword">return</span> (</span><br><span class="line">		<span class="xml"><span class="tag">&lt;<span class="name">Fragment</span>&gt;</span></span></span><br><span class="line"><span class="xml">		    <span class="tag">&lt;<span class="name">button</span> <span class="attr">className</span>=<span class="string">&#123;buttonClassName&#125;</span> &#123;<span class="attr">...rest</span>&#125;&gt;</span></span></span><br><span class="line"><span class="xml">			    &#123;icon&#125;</span></span><br><span class="line"><span class="xml">		    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">		<span class="tag">&lt;/<span class="name">Fragment</span>&gt;</span></span></span><br><span class="line">	);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>设置 icon 代码如下：</p>
