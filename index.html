@@ -249,6 +249,260 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/12/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EReact%E7%9A%84Modal%E7%BB%84%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小吴的Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/07/12/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EReact%E7%9A%84Modal%E7%BB%84%E4%BB%B6/" itemprop="url">实现一个基于React的Modal组件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-12T18:45:46+08:00">
+                2021-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/TypeScript/" itemprop="url" rel="index">
+                    <span itemprop="name">TypeScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><p><a target="_blank" rel="noopener" href="https://wuwenxing0912.github.io/react-ui-lib/home.html#/modal">Modal 组件</a>包含对话框和遮罩层。API 具体如下：</p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>说明</th>
+<th>默认值</th>
+<th>是否可选</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>visible</td>
+<td>Modal 是否可见</td>
+<td>—</td>
+<td>否</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>onClose</td>
+<td>关闭 Modal 回调函数</td>
+<td>—</td>
+<td>否</td>
+<td>React.MouseEventHandler</td>
+</tr>
+<tr>
+<td>onConfirm</td>
+<td>确定 Modal 回调函数</td>
+<td>—</td>
+<td>否</td>
+<td>React.MouseEventHandler</td>
+</tr>
+<tr>
+<td>onClickMaskClose</td>
+<td>是否点击遮罩层关闭 Modal</td>
+<td>false</td>
+<td>是</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>title</td>
+<td>Modal 标题</td>
+<td>“对话框”</td>
+<td>是</td>
+<td>string | ReactNode</td>
+</tr>
+<tr>
+<td>content</td>
+<td>Modal 内容</td>
+<td>—</td>
+<td>是</td>
+<td>string | ReactNode</td>
+</tr>
+<tr>
+<td>cancelText</td>
+<td>Modal 取消按钮 内容</td>
+<td>取消</td>
+<td>是</td>
+<td>string</td>
+</tr>
+<tr>
+<td>confirmText</td>
+<td>Modal 确定按钮 内容</td>
+<td>确定</td>
+<td>是</td>
+<td>string</td>
+</tr>
+<tr>
+<td>ancelButtonType</td>
+<td>Modal 取消按钮 类型</td>
+<td>default</td>
+<td>是</td>
+<td>“default” | “primary” | “dashed” | “danger”</td>
+</tr>
+<tr>
+<td>confirmButtonType</td>
+<td>Modal 确定按钮 类型</td>
+<td>primary</td>
+<td>是</td>
+<td>“default” | “primary” | “dashed” | “danger”</td>
+</tr>
+<tr>
+<td>className</td>
+<td>自定义 Modal 类名</td>
+<td>—</td>
+<td>是</td>
+<td>string</td>
+</tr>
+<tr>
+<td>style</td>
+<td>自定义 Modal外层容器 样式</td>
+<td>—</td>
+<td>是</td>
+<td>React.CSSProperties</td>
+</tr>
+</tbody></table>
+<p>根据上述要求，那么就可以这样设计 Props ：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Props &#123;</span><br><span class="line">	<span class="attr">visible</span>: <span class="built_in">boolean</span>;</span><br><span class="line">	onClose: React.MouseEventHandler;</span><br><span class="line">	onConfirm: React.MouseEventHandler;</span><br><span class="line">	onClickMaskClose?: <span class="built_in">boolean</span>;</span><br><span class="line">	title?: <span class="built_in">string</span> | ReactNode;</span><br><span class="line">	content?: <span class="built_in">string</span> | ReactNode;</span><br><span class="line">	cancelText?: <span class="built_in">string</span>;</span><br><span class="line">	confirmText?: <span class="built_in">string</span>;</span><br><span class="line">	cancelButtonType?: <span class="string">&quot;default&quot;</span> | <span class="string">&quot;primary&quot;</span> | <span class="string">&quot;dashed&quot;</span> | <span class="string">&quot;danger&quot;</span>;</span><br><span class="line">	confirmButtonType?: <span class="string">&quot;default&quot;</span> | <span class="string">&quot;primary&quot;</span> | <span class="string">&quot;dashed&quot;</span> | <span class="string">&quot;danger&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Modal.defaultProps = &#123;</span><br><span class="line">	<span class="attr">onClickMaskClose</span>: <span class="literal">false</span>,</span><br><span class="line">	<span class="attr">title</span>: <span class="string">&quot;对话框&quot;</span>,</span><br><span class="line">	<span class="attr">cancelText</span>: <span class="string">&quot;取消&quot;</span>,</span><br><span class="line">	<span class="attr">confirmText</span>: <span class="string">&quot;确定&quot;</span>,</span><br><span class="line">	<span class="attr">cancelButtonType</span>: <span class="string">&quot;default&quot;</span>,</span><br><span class="line">	<span class="attr">confirmButtonType</span>: <span class="string">&quot;primary&quot;</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/07/12/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EReact%E7%9A%84Modal%E7%BB%84%E4%BB%B6/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/03/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EReact%E7%9A%84Input%E7%BB%84%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1745,154 +1999,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/30/Cookie%E3%80%81Session%E5%92%8CLocalStorage/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小吴的Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/30/Cookie%E3%80%81Session%E5%92%8CLocalStorage/" itemprop="url">Cookie、Session和LocalStorage</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-30T23:29:11+08:00">
-                2018-06-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="一、Cookie"><a href="#一、Cookie" class="headerlink" title="一、Cookie"></a>一、Cookie</h1><p>Cookie是服务器发送给客户端（浏览器）一些信息，浏览器在之后的请求都会带上这些信息。</p>
-<p>Cookie主要用于以下三个方面：<br>1、会话状态管理（如用户登录状态、购物车、游戏分数或其它需要记录的信息）；<br>2、个性化设置（如用户自定义设置、主题等）；<br>3、浏览器行为跟踪（如跟踪分析用户行为等）。</p>
-<p>服务器使用Set-Cookie响应头部向浏览器发送Cookie信息。语法如下：</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/30/Cookie%E3%80%81Session%E5%92%8CLocalStorage/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1948,7 +2054,7 @@
                 <!--<a href="/archives/%7C%7C%20archive">-->
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1970,7 +2076,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
